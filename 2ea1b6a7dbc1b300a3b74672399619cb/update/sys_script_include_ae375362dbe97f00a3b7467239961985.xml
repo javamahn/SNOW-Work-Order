@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_brb_work_order.WorkOrderRestUtils</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>WorkOrderRestUtils</name>
+        <script><![CDATA[var WorkOrderRestUtils = Class.create();
+WorkOrderRestUtils.prototype = {
+    initialize: function() {
+    },
+	
+	sendDispatch: function(work_order_sys_id) {
+		
+		// Get Work Order
+		var workOrder = new GlideRecord('x_brb_work_order_table');
+		workOrder.addQuery('sys_id', work_order_sys_id);
+		workOrder.query();
+		if (workOrder.next()) { /* If Work Order Found */
+			
+			var group = workOrder.assignment_group.name;				
+			if(group == 'Insight Dispatch') { /* If Assignment Group is Insight Dispatch */								
+				
+				if(typeof workOrder.correlation_id == 'undefined' || workOrder.correlation_id == '') {
+					// Send REST calls to Insight
+					
+					// 1. GetToken					
+					var request = new sn_ws.RESTMessageV2('Insight - Field Power','Get Token');  //Configure and get values
+					var response = request.execute();
+					var json = response.getBody();
+					var token = JSON.parse(json);
+					
+					// 2. CreateWorkOrder						
+					var data = {};
+					data.CustomerWorkOrderNo = workOrder.number + '';
+					
+					// Use Work Order _Task_ Sys Id if it can be found ...					
+					var task = new GlideRecord('x_brb_work_order_task');
+					task.addQuery('parent', workOrder.sys_id);
+					task.addQuery('work_order_task_type', 'Dispatch');
+					task.query();
+					if (task.next()) { 
+						data.Incident_Sys_id = task.sys_id.toString();	
+					}
+					else {
+						data.Incident_Sys_id = workOrder.sys_id.toString();	
+					}										
+					
+					data.Customer = "Brown and Brown";
+					data.SiteID = workOrder.location.u_site_code.toString();
+					data.Address1 = workOrder.delivery_address_street + ' ' + workOrder.delivery_address_suite;
+					data.City = workOrder.delivery_address_city + '';
+					data.State = this.getStateFullName(workOrder.delivery_address_state_province + '');
+					data.Zip = workOrder.delivery_address_zip_postal_code + '';
+					data.Country = "USA";
+					data.SiteWorkPhone = workOrder.technical_contact_phone + ''; //Technical Contact Phone
+					data.PrimaryContactName = workOrder.local_contact.first_name + ' ' + workOrder.local_contact.last_name;
+					data.PrimaryPhoneNumber = workOrder.local_contact_phone + '';
+					data.WorkCategory = "On-Site Support";
+					data.WorkType = 'B&B-' + workOrder.work_type.getDisplayValue();
+					data.WorkRequest = workOrder.request_type.getDisplayValue();
+					data.ProblemDescription = workOrder.short_description + ' - ' + workOrder.description;
+					
+					data.Manufacturer = null;
+					data.Model = null;
+					data.SerialNumber = null;
+					data.AssetLocation = null;
+					data.SLA = null;
+					data.Attachments = null;
+  					
+					//if(data.PrimaryPhoneNumber == ''){ data.PrimaryPhoneNumber = '555-555-5555';} // Set these to some default instead
+					//if(data.SiteWorkPhone == ''){ data.SiteWorkPhone = '555-567-5678';} // Set these to some default instead
+					
+					var requestBody = JSON.stringify(data, null, "\t");
+					
+					request = new sn_ws.RESTMessageV2('Insight - Field Power','Create Work Order');  //Configure and get values
+					request.setStringParameter('token', token.access_token);
+					request.setRequestBody(requestBody);
+					response = request.execute();
+					json = response.getBody();
+					
+					var create = JSON.parse(json);
+					
+					if(create.AdditionalInfo == 'Success') {
+						// If WO Created Successfully , Set correlation_id and Add Note
+						workOrder.correlation_id = create.Data.WorkOrderNo; // correlation_id - Field Power Work Order Number
+						workOrder.correlation_display = group;
+						
+						workOrder.work_notes = 'Success - Created Insight Field Power Work Order: ' + create.Data.WorkOrderNo + '\r\n' + '\r\n' 
+							+ requestBody + '\r\n' + '\r\n' 
+							+ JSON.stringify(create, null, "\t");
+						workOrder.update();
+					}
+					else {
+						// If not Success, then add Note						
+						workOrder.work_notes = 'Failed - Error on creating Insight Field Power Work Order: ' + '\r\n' + '\r\n' 
+							+ requestBody + '\r\n' + '\r\n' 
+							+ JSON.stringify(create, null, "\t");
+						workOrder.update();
+					}				
+				}
+				else { /* If correlation_id already has value */
+
+				}
+			}
+			else { /* If Assignment Group is NOT Insight Dispatch */
+				
+			}
+		}
+	},
+	
+	getStateFullName: function(stateCode) {
+		
+		var stateFullName = '';
+		
+		switch(stateCode.toUpperCase().trim()) {
+			case "AK": stateFullName = "Alaska"; break;
+			case "AL": stateFullName = "Alabama"; break;
+			case "AR": stateFullName = "Arkansas"; break;
+			case "AZ": stateFullName = "Arizona"; break;
+			case "CA": stateFullName = "California"; break;
+			case "CO": stateFullName = "Colorado"; break;
+			case "CT": stateFullName = "Connecticut"; break;
+			case "DC": stateFullName = "Washington DC"; break;
+			case "DE": stateFullName = "Delaware"; break;
+			case "FL": stateFullName = "Florida"; break;
+			case "GA": stateFullName = "Georgia"; break;
+			case "GU": stateFullName = "Guam"; break;
+			case "HI": stateFullName = "Hawaii"; break;
+			case "IA": stateFullName = "Iowa"; break;
+			case "ID": stateFullName = "Idaho"; break;
+			case "IL": stateFullName = "Illinois"; break;
+			case "IN": stateFullName = "Indiana"; break;
+			case "KS": stateFullName = "Kansas"; break;
+			case "KY": stateFullName = "Kentucky"; break;
+			case "LA": stateFullName = "Louisiana"; break;
+			case "MA": stateFullName = "Massachusetts"; break;
+			case "MD": stateFullName = "Maryland"; break;
+			case "ME": stateFullName = "Maine"; break;
+			case "MI": stateFullName = "Michigan"; break;
+			case "MN": stateFullName = "Minnesota"; break;
+			case "MO": stateFullName = "Missouri"; break;
+			case "MS": stateFullName = "Mississippi"; break;
+			case "MT": stateFullName = "Montana"; break;
+			case "NC": stateFullName = "North Carolina"; break;
+			case "ND": stateFullName = "North Dakota"; break;
+			case "NE": stateFullName = "Nebraska"; break;
+			case "NH": stateFullName = "New Hampshire"; break;
+			case "NJ": stateFullName = "New Jersey"; break;
+			case "NM": stateFullName = "New Mexico"; break;
+			case "NV": stateFullName = "Nevada"; break;
+			case "NY": stateFullName = "New York"; break;
+			case "OH": stateFullName = "Ohio"; break;
+			case "OK": stateFullName = "Oklahoma"; break;
+			case "OR": stateFullName = "Oregon"; break;
+			case "PA": stateFullName = "Pennsylvania"; break;
+			case "PR": stateFullName = "Puerto Rico"; break;
+			case "RI": stateFullName = "Rhode Island"; break;
+			case "SC": stateFullName = "South Carolina"; break;
+			case "SD": stateFullName = "South Dakota"; break;
+			case "TN": stateFullName = "Tennessee"; break;
+			case "TX": stateFullName = "Texas"; break;
+			case "UT": stateFullName = "Utah"; break;
+			case "VA": stateFullName = "Virginia"; break;
+			case "VI": stateFullName = "Virgin Islands"; break;
+			case "VT": stateFullName = "Vermont"; break;
+			case "WA": stateFullName = "Washington"; break;
+			case "WI": stateFullName = "Wisconsin"; break;
+			case "WV": stateFullName = "West Virginia"; break;
+			case "WY": stateFullName = "Wyoming"; break;
+		}
+		
+		return stateFullName;
+	},
+
+    type: 'WorkOrderRestUtils'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-05-24 14:31:33</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>ae375362dbe97f00a3b7467239961985</sys_id>
+        <sys_mod_count>65</sys_mod_count>
+        <sys_name>WorkOrderRestUtils</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_script_include_ae375362dbe97f00a3b7467239961985</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-06-05 18:40:30</sys_updated_on>
+    </sys_script_include>
+</record_update>

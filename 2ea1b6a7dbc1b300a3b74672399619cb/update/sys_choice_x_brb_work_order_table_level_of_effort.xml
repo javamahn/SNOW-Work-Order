@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="level_of_effort" table="x_brb_work_order_table" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>0.5 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>1</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:40:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>66aebac3db59b3008dfae9ec0b961998</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:25:31</sys_updated_on>
+            <value>0.5</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>1 Day</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>2</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:40:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>49beb6c3db59b3008dfae9ec0b9619fb</sys_id>
+            <sys_mod_count>5</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:27:39</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>1.5 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>3</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:40:55</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5ebefe83db59b3008dfae9ec0b9619c2</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:25:39</sys_updated_on>
+            <value>1.5</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>2 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>4</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:41:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9fbeb207db59b3008dfae9ec0b96198f</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:25:41</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>3 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>5</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:41:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bcce36c3db59b3008dfae9ec0b961918</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:25:45</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>4 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>6</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:41:10</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1ece36c3db59b3008dfae9ec0b961919</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:25:49</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>5 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>7</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:41:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>03cef207db59b3008dfae9ec0b961902</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:25:51</sys_updated_on>
+            <value>5</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>7 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>8</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:41:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a8de36c3db59b3008dfae9ec0b96191a</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:25:53</sys_updated_on>
+            <value>7</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>10 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>9</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:41:28</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dade3607db59b3008dfae9ec0b96191f</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:25:56</sys_updated_on>
+            <value>10</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>15 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>10</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:41:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>afdef207db59b3008dfae9ec0b961902</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:26:00</sys_updated_on>
+            <value>15</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>20 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>11</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:42:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3efebe83db59b3008dfae9ec0b9619fd</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:26:02</sys_updated_on>
+            <value>20</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>level_of_effort</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>30 Days</label>
+            <language>en</language>
+            <name>x_brb_work_order_table</name>
+            <sequence>12</sequence>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:42:09</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>63fef207db59b3008dfae9ec0b9619ee</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-15 14:26:04</sys_updated_on>
+            <value>30</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>level_of_effort</element>
+            <name>x_brb_work_order_table</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 15:40:46</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>85beb207db59b3008dfae9ec0b961929</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>level_of_effort</sys_name>
+            <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+            <sys_update_name>sys_choice_x_brb_work_order_table_level_of_effort</sys_update_name>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-13 15:40:46</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="d6281783dbd5b300a3b74672399619b7" sys_domain="global" table="x_brb_work_order_table" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>stephen.anderson</sys_created_by>
+            <sys_created_on>2019-05-13 17:31:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5e281783dbd5b300a3b74672399619b9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_brb_work_order_table" name="x_brb_work_order_table" sys_domain="global" view="Default view">d6281783dbd5b300a3b74672399619b7</sys_ui_form>
+            <sys_ui_section caption="Work Order" display_value="Work Order" name="x_brb_work_order_table" sys_domain="global" view="Default view">d2281783dbd5b300a3b74672399619b6</sys_ui_section>
+            <sys_updated_by>stephen.anderson</sys_updated_by>
+            <sys_updated_on>2019-05-13 17:31:58</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 17:55:03</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4c7dd3c3dbd9b3008dfae9ec0b961945</sys_id>
+            <sys_mod_count>3</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_brb_work_order_table" name="x_brb_work_order_table" sys_domain="global" view="Default view">d6281783dbd5b300a3b74672399619b7</sys_ui_form>
+            <sys_ui_section caption="Work Site &amp; Details" display_value="Work Site &amp; Details" name="x_brb_work_order_table" sys_domain="global" view="Default view">c87d93c3dbd9b3008dfae9ec0b961924</sys_ui_section>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-13 18:54:11</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>2</position>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-13 18:50:08</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4f0a6303db1db3008dfae9ec0b9619ca</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_brb_work_order_table" name="x_brb_work_order_table" sys_domain="global" view="Default view">d6281783dbd5b300a3b74672399619b7</sys_ui_form>
+            <sys_ui_section caption="Review" display_value="Review" name="x_brb_work_order_table" sys_domain="global" view="Default view">070a6303db1db3008dfae9ec0b9619c8</sys_ui_section>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-13 18:54:11</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>3</position>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-05-14 13:59:16</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>4811ff93dbd9f3008dfae9ec0b9619bf</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="x_brb_work_order_table" name="x_brb_work_order_table" sys_domain="global" view="Default view">d6281783dbd5b300a3b74672399619b7</sys_ui_form>
+            <sys_ui_section caption="Activity Log" display_value="Activity Log" name="x_brb_work_order_table" sys_domain="global" view="Default view">cc11bf93dbd9f3008dfae9ec0b9619e8</sys_ui_section>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-05-14 13:59:16</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>x_brb_work_order_table</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>stephen.anderson</sys_created_by>
+            <sys_created_on>2019-05-13 17:31:58</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d6281783dbd5b300a3b74672399619b7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_brb_work_order_table</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+            <sys_update_name>sys_ui_form_sections_d6281783dbd5b300a3b74672399619b7</sys_update_name>
+            <sys_updated_by>stephen.anderson</sys_updated_by>
+            <sys_updated_on>2019-05-13 17:31:58</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

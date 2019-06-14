@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>number_of_techs</field>
+        <global>true</global>
+        <isolate_script>false</isolate_script>
+        <messages/>
+        <name>Work Order - Form Load</name>
+        <order/>
+        <script><![CDATA[function doAssignmentGroupChecks(assignmentGroup) { // reference is passed into callback as first arguments
+	// Display Resource Rate Codes based on assignmentGroup
+	if (assignmentGroup.name == 'Insight Dispatch') {	   	
+		$j('#ReviewInsightRates').show();
+		$j('#ReviewBETSRates').hide();
+	}
+	else {
+		$j('#ReviewBETSRates').show();
+		$j('#ReviewInsightRates').hide();
+	}
+}
+
+function onLoad() {
+	// Summary:
+	// - Populate default Preferred Start Date
+	// - Hide Review Tab - Show for Reviewer role
+	// - Hide Configuration Item
+	// - Work Type Custom Project - Set Description Field Message
+	// - Show/Hide Delivery Address Fields as Necessary
+	// - Populate Location Text Box	
+    
+	
+	// - Populate default Preferred Start Date with 2 business days from today
+
+	var expected_start = g_form.getValue('expected_start');
+	if( typeof expected_start == 'undefined' || expected_start == '') {
+		
+		var ajax1 = new GlideAjax('x_brb_work_order.WorkOrderUtils');
+		ajax1.addParam('sysparm_name', 'getExpectedStart');		
+		ajax1.getXMLAnswer(handleExpectedStart);
+	}
+	
+	function handleExpectedStart(response) {
+		//var data = JSON.parse(response);
+		//var value = data.newDateTime;
+		//g_form.setValue('expected_start', value);
+		g_form.setValue('expected_start', response);
+	}		
+	
+	var state = g_form.getValue('state');	
+	
+	// Hide Review Tab - Show for Reviewer role, only if at or after Review State
+	g_form.setSectionDisplay('review', false);
+
+	if(g_user.hasRole('x_brb_work_order.reviewer')) { 
+		if(state >= 0 /* Review */) {	
+			// Show Review tab if hasRole x_brb_work_order.reviewer, and only if Review or Later state
+			g_form.setSectionDisplay('review', true);
+			g_form.setMandatory('number_of_techs', true);
+			g_form.setMandatory('estimated_work_duration', true);		
+		}
+		
+		// Prepare Resource Rate Codes For Display
+		$j('#x_brb_work_order_table\\.u_string_3').hide();
+		$j('#x_brb_work_order_table\\.u_string_3').parent().append('<div id="ReviewInsightRates"><img src="Insight_Rates.png" /></div>');
+		$j('#x_brb_work_order_table\\.u_string_3').parent().append('<div id="ReviewBETSRates"><img src="BETS_Rates.png" /></div>');		
+		var assignmentGroup = g_form.getValue('assignment_group');	
+		g_form.getReference('assignment_group', doAssignmentGroupChecks);
+	}
+	
+	// Hide Configuration Item
+	g_form.setDisplay('cmdb_ci', 'false');
+				
+	// if Work Type is Custom Project set description field message
+	var work_type = g_form.getValue('work_type');
+	
+	if(work_type == 5 /* Custom Project */) {
+		g_form.showFieldMsg('description', 'Please fill out the description accurately with as much info as possible.','warning');
+		g_form.setMandatory('description', true);		
+	}
+		
+	// Show/Hide Delivery Address Fields as Necessary
+	var sameAs = g_form.getValue('delivery_address_same_as_billable');
+	
+	if( sameAs == 1 /* Yes */ || sameAs == '') {
+		g_form.setReadOnly('delivery_address_street', true);
+		g_form.setReadOnly('delivery_address_suite', true);		
+		g_form.setReadOnly('delivery_address_city', true);
+		g_form.setReadOnly('delivery_address_state_province', true);
+		g_form.setReadOnly('delivery_address_zip_postal_code', true);
+				
+		g_form.setMandatory('delivery_address_street', false);
+		g_form.setMandatory('delivery_address_city', false);
+		g_form.setMandatory('delivery_address_state_province', false);
+		g_form.setMandatory('delivery_address_zip_postal_code', false);							
+	}
+	else { /* 0 - No */ 
+		g_form.setReadOnly('delivery_address_street', false);
+		g_form.setReadOnly('delivery_address_suite', false);
+		g_form.setReadOnly('delivery_address_city', false);
+		g_form.setReadOnly('delivery_address_state_province', false);
+		g_form.setReadOnly('delivery_address_zip_postal_code', false);
+		
+		g_form.setMandatory('delivery_address_street', true);
+		g_form.setMandatory('delivery_address_city', true);
+		g_form.setMandatory('delivery_address_state_province', true);
+		g_form.setMandatory('delivery_address_zip_postal_code', true);				
+	}
+	
+	// Populate Location Text Box
+	var location = g_form.getValue('location');
+	
+	var ajax = new GlideAjax('x_brb_work_order.WorkOrderUtils');
+	ajax.addParam('sysparm_name', 'getLocationText');
+	ajax.addParam('sysparm_sys_id', location);
+	ajax.getXMLAnswer(handleLocation);
+	
+	function handleLocation(response) {
+		var locationInfo = JSON.parse(response);
+		g_form.setValue('u_string_1', locationInfo.locationText);
+		
+		if( sameAs == 1 /* Yes */ || sameAs == '') {
+			g_form.setValue('delivery_address_street', locationInfo.street);
+			g_form.setValue('delivery_address_suite', locationInfo.suite);
+			g_form.setValue('delivery_address_city', locationInfo.city);
+			g_form.setValue('delivery_address_state_province', locationInfo.state);
+			g_form.setValue('delivery_address_zip_postal_code', locationInfo.zip);
+		}
+	}
+	
+	// Populate Technical Contact Phone if blank ( Such as Work Order Create New )
+	var technical_contact_phone = g_form.getValue('technical_contact_phone');
+		
+	if( typeof technical_contact_phone == 'undefined' || technical_contact_phone == '') {
+		var ajax2 = new GlideAjax('x_brb_work_order.WorkOrderUtils');
+		ajax2.addParam('sysparm_name', 'getUserInfo');
+		ajax2.addParam('sysparm_sys_id', g_form.getValue('opened_by'));
+		ajax2.getXMLAnswer(handleUserInfo_TechnicalContact);				
+	}
+	
+	function handleUserInfo_TechnicalContact(response) {
+		var userInfo = JSON.parse(response);
+		g_form.setValue('technical_contact_phone', userInfo.phone );
+	}
+	
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-05-13 19:36:36</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>45943f0fdb1db3008dfae9ec0b961984</sys_id>
+        <sys_mod_count>101</sys_mod_count>
+        <sys_name>Work Order - Form Load</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_script_client_45943f0fdb1db3008dfae9ec0b961984</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-06-06 16:07:02</sys_updated_on>
+        <table>x_brb_work_order_table</table>
+        <type>onLoad</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

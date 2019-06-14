@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>location</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Work Order - Location Change</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	if (isLoading || newValue === '') {
+		return;
+	}
+	
+	// Populate Location Text Box
+	var location = newValue;
+	
+	var ajax = new GlideAjax('x_brb_work_order.WorkOrderUtils');
+	ajax.addParam('sysparm_name', 'getLocationText');
+	ajax.addParam('sysparm_sys_id', location);
+	ajax.getXMLAnswer(handleLocation);
+	
+	function handleLocation(response){
+		//var answer = response.responseXML.documentElement.getAttribute("answer");
+		var locationInfo = JSON.parse(response);
+		g_form.setValue('u_string_1', locationInfo.locationText);
+		
+		var sameAs = g_form.getValue('delivery_address_same_as_billable');
+		if( sameAs == 1 /* Yes */ || sameAs == '') {
+			g_form.setValue('delivery_address_street', locationInfo.street);
+			g_form.setValue('delivery_address_suite', locationInfo.suite);
+			g_form.setValue('delivery_address_city', locationInfo.city);
+			g_form.setValue('delivery_address_state_province', locationInfo.state);
+			g_form.setValue('delivery_address_zip_postal_code', locationInfo.zip);
+		}
+		
+		// Set Local Contact from Profit Center Accounting Leader 
+		var accountingLeader = locationInfo.profitCenter.accountingLeader;
+		if(typeof accountingLeader != 'undefined' && accountingLeader != '') 
+		{
+			g_form.setValue('local_contact', accountingLeader);				
+		}
+		else
+		{
+			g_form.clearValue('local_contact');
+		}
+		
+	}
+	
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-05-13 17:58:47</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>540edbc3dbd9b3008dfae9ec0b961940</sys_id>
+        <sys_mod_count>32</sys_mod_count>
+        <sys_name>Work Order - Location Change</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_script_client_540edbc3dbd9b3008dfae9ec0b961940</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-05-22 15:34:26</sys_updated_on>
+        <table>x_brb_work_order_table</table>
+        <type>onChange</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

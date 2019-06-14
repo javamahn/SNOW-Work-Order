@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name>get_directions</action_name>
+        <active>true</active>
+        <client>true</client>
+        <client_script_v2/>
+        <comments/>
+        <condition>(!current.street.nil() &amp;&amp; !current.city.nil()) || (!current.latitude.nil() &amp;&amp; !current.longitude.nil())</condition>
+        <form_action>true</form_action>
+        <form_button>false</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>true</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <hint/>
+        <isolate_script>true</isolate_script>
+        <list_action>true</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>true</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <name>Get Directions</name>
+        <onclick>GetDirections()</onclick>
+        <order>100</order>
+        <script><![CDATA[function GetDirections() {
+	
+	var urlBase = 'https://www.google.com/maps/dir//';
+
+	var delivery_address_street = g_form.getValue('delivery_address_street');	
+	var delivery_address_suite = g_form.getValue('delivery_address_suite');	
+	var delivery_address_city = g_form.getValue('delivery_address_city');	
+	var delivery_address_state_province = g_form.getValue('delivery_address_state_province');	
+	var delivery_address_zip_postal_code = g_form.getValue('delivery_address_zip_postal_code');	
+	
+	var url = urlBase +  delivery_address_street + ' ' +  delivery_address_suite + ' ' + delivery_address_city 
+					  + ' ' + delivery_address_state_province + ' ' + delivery_address_zip_postal_code;
+	
+	url = replaceAll(url,'/r','');  // Remove special characters
+	url = replaceAll(url,'/n',' ');
+	url = replaceAll(url,'#','');
+	url = replaceAll(url,'  ',' '); // clean up extra spaces
+	url = replaceAll(url,' ','+'); // replace spaces for + as expected by google
+	
+	window.open(url);	
+}
+
+function replaceAll(source, targetValue, replacementValue) {
+	return source.split(targetValue).join(replacementValue);
+}]]></script>
+        <show_insert>false</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-05-24 18:37:22</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b66900fedb6d7f00a3b7467239961938</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Get Directions</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_ui_action_b66900fedb6d7f00a3b7467239961938</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-05-24 18:38:09</sys_updated_on>
+        <table>x_brb_work_order_table</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>
