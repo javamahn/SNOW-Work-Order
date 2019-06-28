@@ -3,7 +3,7 @@
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
             <element>number</element>
-            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="14a376b9db71b300a3b746723996191f">6625323ddb71b300a3b746723996197e</list_id>
+            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="ee4905251b4abf00ac8ba7d4bd4bcb7e">6625323ddb71b300a3b746723996197e</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>0</position>
@@ -18,7 +18,7 @@
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
             <element>assignment_group</element>
-            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="14a376b9db71b300a3b746723996191f">6625323ddb71b300a3b746723996197e</list_id>
+            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="ee4905251b4abf00ac8ba7d4bd4bcb7e">6625323ddb71b300a3b746723996197e</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>1</position>
@@ -33,7 +33,7 @@
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
             <element>assigned_to</element>
-            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="14a376b9db71b300a3b746723996191f">6625323ddb71b300a3b746723996197e</list_id>
+            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="ee4905251b4abf00ac8ba7d4bd4bcb7e">6625323ddb71b300a3b746723996197e</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>2</position>
@@ -48,7 +48,7 @@
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
             <element>short_description</element>
-            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="14a376b9db71b300a3b746723996191f">6625323ddb71b300a3b746723996197e</list_id>
+            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="ee4905251b4abf00ac8ba7d4bd4bcb7e">6625323ddb71b300a3b746723996197e</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>3</position>
@@ -63,7 +63,7 @@
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
             <element>expected_start</element>
-            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="14a376b9db71b300a3b746723996191f">6625323ddb71b300a3b746723996197e</list_id>
+            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="ee4905251b4abf00ac8ba7d4bd4bcb7e">6625323ddb71b300a3b746723996197e</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>4</position>
@@ -78,7 +78,7 @@
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
             <element>parent</element>
-            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="14a376b9db71b300a3b746723996191f">6625323ddb71b300a3b746723996197e</list_id>
+            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="ee4905251b4abf00ac8ba7d4bd4bcb7e">6625323ddb71b300a3b746723996197e</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>5</position>
@@ -93,7 +93,7 @@
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
             <element>state</element>
-            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="14a376b9db71b300a3b746723996191f">6625323ddb71b300a3b746723996197e</list_id>
+            <list_id display_value="x_brb_work_order_task" element="NULL" name="x_brb_work_order_task" parent="NULL" relationship="NULL" sys_domain="global" view="ee4905251b4abf00ac8ba7d4bd4bcb7e">6625323ddb71b300a3b746723996197e</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>6</position>
@@ -132,7 +132,7 @@
             <sys_updated_by>Rich.Currie</sys_updated_by>
             <sys_updated_on>2019-06-03 14:18:04</sys_updated_on>
             <sys_user/>
-            <view display_value="Rptd4a3fe75db71b300a3b746723996190c" name="RPTd4a3fe75db71b300a3b746723996190c">14a376b9db71b300a3b746723996191f</view>
+            <view display_value="Rptd4a3fe75db71b300a3b746723996190c" name="RPTd4a3fe75db71b300a3b746723996190c">ee4905251b4abf00ac8ba7d4bd4bcb7e</view>
             <view_name/>
         </sys_ui_list>
     </sys_ui_list>

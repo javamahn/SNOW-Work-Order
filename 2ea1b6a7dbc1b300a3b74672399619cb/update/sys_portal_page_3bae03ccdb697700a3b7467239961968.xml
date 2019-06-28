@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update node_type="sys_portal_page" unload_date="2019-06-06 20:49:58">
+<?xml version="1.0" encoding="UTF-8"?><record_update node_type="sys_portal_page" unload_date="2019-06-27 18:16:33">
     <sys_portal_page action="INSERT_OR_UPDATE">
         <layout/>
         <order/>
@@ -37,6 +37,30 @@
                 <sys_mod_count>0</sys_mod_count>
                 <sys_updated_by>Rich.Currie</sys_updated_by>
                 <sys_updated_on>2019-05-16 19:25:55</sys_updated_on>
+                <related_items_node>
+                    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+                        <grid_canvas display_value="PA Overview">9c22e9a11bcabf00ac8ba7d4bd4bcbaa</grid_canvas>
+                        <height>10</height>
+                        <portal_widget display_value="Created 05-16-2019 12:25:55 PM">280f0300dba97700a3b7467239961924</portal_widget>
+                        <posx>0</posx>
+                        <posy>15</posy>
+                        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+                        <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+                        <sys_created_on>2019-06-14 23:52:30</sys_created_on>
+                        <sys_customer_update>false</sys_customer_update>
+                        <sys_id>942269e11bcabf00ac8ba7d4bd4bcbb9</sys_id>
+                        <sys_mod_count>3</sys_mod_count>
+                        <sys_name>9c22e9a11bcabf00ac8ba7d4bd4bcbaa</sys_name>
+                        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+                        <sys_policy/>
+                        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+                        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+                        <sys_update_name>sys_grid_canvas_pane_942269e11bcabf00ac8ba7d4bd4bcbb9</sys_update_name>
+                        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+                        <sys_updated_on>2019-06-15 00:13:53</sys_updated_on>
+                        <width>6</width>
+                    </sys_grid_canvas_pane>
+                </related_items_node>
                 <related_items_node>
                     <sys_portal_preferences action="INSERT_OR_UPDATE">
                         <name>renderer</name>
@@ -132,13 +156,37 @@
                 <dropzone>dropzone0</dropzone>
                 <offset>0</offset>
                 <page display_value="PA Overview">3bae03ccdb697700a3b7467239961968</page>
-                <summary>WO Table by location</summary>
+                <summary>Work Orders in state 'Work in Progress'</summary>
                 <sys_created_by>Rich.Currie</sys_created_by>
                 <sys_created_on>2019-05-23 16:44:07</sys_created_on>
                 <sys_id>661d629edb6d7b008dfae9ec0b9619e0</sys_id>
-                <sys_mod_count>1</sys_mod_count>
-                <sys_updated_by>Rich.Currie</sys_updated_by>
-                <sys_updated_on>2019-05-23 16:44:07</sys_updated_on>
+                <sys_mod_count>2</sys_mod_count>
+                <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+                <sys_updated_on>2019-06-15 00:03:50</sys_updated_on>
+                <related_items_node>
+                    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+                        <grid_canvas display_value="PA Overview">9c22e9a11bcabf00ac8ba7d4bd4bcbaa</grid_canvas>
+                        <height>15</height>
+                        <portal_widget display_value="Created 05-23-2019 09:44:07 AM">661d629edb6d7b008dfae9ec0b9619e0</portal_widget>
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+                        <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+                        <sys_created_on>2019-06-14 23:52:30</sys_created_on>
+                        <sys_customer_update>false</sys_customer_update>
+                        <sys_id>942269e11bcabf00ac8ba7d4bd4bcbb7</sys_id>
+                        <sys_mod_count>3</sys_mod_count>
+                        <sys_name>9c22e9a11bcabf00ac8ba7d4bd4bcbaa</sys_name>
+                        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+                        <sys_policy/>
+                        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+                        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+                        <sys_update_name>sys_grid_canvas_pane_942269e11bcabf00ac8ba7d4bd4bcbb7</sys_update_name>
+                        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+                        <sys_updated_on>2019-06-15 00:13:53</sys_updated_on>
+                        <width>12</width>
+                    </sys_grid_canvas_pane>
+                </related_items_node>
                 <related_items_node>
                     <sys_portal_preferences action="INSERT_OR_UPDATE">
                         <name>can_subscribe</name>
@@ -190,10 +238,10 @@
                         <sys_created_by>Rich.Currie</sys_created_by>
                         <sys_created_on>2019-05-23 16:44:07</sys_created_on>
                         <sys_id>6a1d629edb6d7b008dfae9ec0b9619e2</sys_id>
-                        <sys_mod_count>0</sys_mod_count>
-                        <sys_updated_by>Rich.Currie</sys_updated_by>
-                        <sys_updated_on>2019-05-23 16:44:07</sys_updated_on>
-                        <value>966bea1edb6d7b008dfae9ec0b9619d6</value>
+                        <sys_mod_count>1</sys_mod_count>
+                        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+                        <sys_updated_on>2019-06-15 00:03:50</sys_updated_on>
+                        <value>12b421251bcabf00ac8ba7d4bd4bcb95</value>
                     </sys_portal_preferences>
                     <sys_portal_preferences action="INSERT_OR_UPDATE">
                         <name>title</name>
@@ -201,10 +249,10 @@
                         <sys_created_by>Rich.Currie</sys_created_by>
                         <sys_created_on>2019-05-23 16:44:07</sys_created_on>
                         <sys_id>a21d629edb6d7b008dfae9ec0b9619e1</sys_id>
-                        <sys_mod_count>0</sys_mod_count>
-                        <sys_updated_by>Rich.Currie</sys_updated_by>
-                        <sys_updated_on>2019-05-23 16:44:07</sys_updated_on>
-                        <value>WO Table by location</value>
+                        <sys_mod_count>1</sys_mod_count>
+                        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+                        <sys_updated_on>2019-06-15 00:03:50</sys_updated_on>
+                        <value>Work Orders in state 'Work in Progress'</value>
                     </sys_portal_preferences>
                 </related_items_node>
             </sys_portal>
@@ -219,6 +267,30 @@
                 <sys_mod_count>0</sys_mod_count>
                 <sys_updated_by>Rich.Currie</sys_updated_by>
                 <sys_updated_on>2019-05-16 19:25:55</sys_updated_on>
+                <related_items_node>
+                    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+                        <grid_canvas display_value="PA Overview">9c22e9a11bcabf00ac8ba7d4bd4bcbaa</grid_canvas>
+                        <height>10</height>
+                        <portal_widget display_value="Created 05-16-2019 12:25:55 PM">680f0300dba97700a3b746723996192b</portal_widget>
+                        <posx>6</posx>
+                        <posy>25</posy>
+                        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+                        <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+                        <sys_created_on>2019-06-14 23:52:30</sys_created_on>
+                        <sys_customer_update>false</sys_customer_update>
+                        <sys_id>502269e11bcabf00ac8ba7d4bd4bcbbe</sys_id>
+                        <sys_mod_count>3</sys_mod_count>
+                        <sys_name>9c22e9a11bcabf00ac8ba7d4bd4bcbaa</sys_name>
+                        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+                        <sys_policy/>
+                        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+                        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+                        <sys_update_name>sys_grid_canvas_pane_502269e11bcabf00ac8ba7d4bd4bcbbe</sys_update_name>
+                        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+                        <sys_updated_on>2019-06-15 00:13:53</sys_updated_on>
+                        <width>6</width>
+                    </sys_grid_canvas_pane>
+                </related_items_node>
                 <related_items_node>
                     <sys_portal_preferences action="INSERT_OR_UPDATE">
                         <name>renderer</name>
@@ -310,6 +382,30 @@
                 <sys_mod_count>0</sys_mod_count>
                 <sys_updated_by>Rich.Currie</sys_updated_by>
                 <sys_updated_on>2019-05-16 19:25:55</sys_updated_on>
+                <related_items_node>
+                    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+                        <grid_canvas display_value="PA Overview">9c22e9a11bcabf00ac8ba7d4bd4bcbaa</grid_canvas>
+                        <height>10</height>
+                        <portal_widget display_value="Created 05-16-2019 12:25:55 PM">a00f0300dba97700a3b7467239961929</portal_widget>
+                        <posx>6</posx>
+                        <posy>15</posy>
+                        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+                        <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+                        <sys_created_on>2019-06-14 23:52:30</sys_created_on>
+                        <sys_customer_update>false</sys_customer_update>
+                        <sys_id>182269e11bcabf00ac8ba7d4bd4bcbbc</sys_id>
+                        <sys_mod_count>3</sys_mod_count>
+                        <sys_name>9c22e9a11bcabf00ac8ba7d4bd4bcbaa</sys_name>
+                        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+                        <sys_policy/>
+                        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+                        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+                        <sys_update_name>sys_grid_canvas_pane_182269e11bcabf00ac8ba7d4bd4bcbbc</sys_update_name>
+                        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+                        <sys_updated_on>2019-06-15 00:13:53</sys_updated_on>
+                        <width>6</width>
+                    </sys_grid_canvas_pane>
+                </related_items_node>
                 <related_items_node>
                     <sys_portal_preferences action="INSERT_OR_UPDATE">
                         <name>sys_id</name>
@@ -412,6 +508,30 @@
                 <sys_mod_count>0</sys_mod_count>
                 <sys_updated_by>Rich.Currie</sys_updated_by>
                 <sys_updated_on>2019-05-16 19:25:55</sys_updated_on>
+                <related_items_node>
+                    <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
+                        <grid_canvas display_value="PA Overview">9c22e9a11bcabf00ac8ba7d4bd4bcbaa</grid_canvas>
+                        <height>10</height>
+                        <portal_widget display_value="Created 05-16-2019 12:25:55 PM">ec0f0300dba97700a3b7467239961926</portal_widget>
+                        <posx>0</posx>
+                        <posy>25</posy>
+                        <sys_class_name>sys_grid_canvas_pane</sys_class_name>
+                        <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+                        <sys_created_on>2019-06-14 23:52:30</sys_created_on>
+                        <sys_customer_update>false</sys_customer_update>
+                        <sys_id>dc2269e11bcabf00ac8ba7d4bd4bcbba</sys_id>
+                        <sys_mod_count>3</sys_mod_count>
+                        <sys_name>9c22e9a11bcabf00ac8ba7d4bd4bcbaa</sys_name>
+                        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+                        <sys_policy/>
+                        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+                        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+                        <sys_update_name>sys_grid_canvas_pane_dc2269e11bcabf00ac8ba7d4bd4bcbba</sys_update_name>
+                        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+                        <sys_updated_on>2019-06-15 00:13:53</sys_updated_on>
+                        <width>6</width>
+                    </sys_grid_canvas_pane>
+                </related_items_node>
                 <related_items_node>
                     <sys_portal_preferences action="INSERT_OR_UPDATE">
                         <name>sys_id</name>

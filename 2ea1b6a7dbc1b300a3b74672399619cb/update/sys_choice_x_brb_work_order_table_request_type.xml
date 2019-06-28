@@ -387,7 +387,7 @@
             <sys_created_by>greg.brubaker</sys_created_by>
             <sys_created_on>2019-05-13 14:50:53</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>2243fa0bdb19b3008dfae9ec0b9619e1</sys_id>
+            <sys_id>46ee5e55db16b300a3b74672399619a9</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>request_type</sys_name>
             <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>

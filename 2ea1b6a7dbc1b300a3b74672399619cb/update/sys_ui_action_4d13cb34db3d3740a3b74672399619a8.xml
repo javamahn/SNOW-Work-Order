@@ -5,7 +5,7 @@
         <client>false</client>
         <client_script_v2/>
         <comments/>
-        <condition>current.state == 2 /* Work In Progress*/   &amp;&amp;  gs.hasRole("x_brb_work_order.reviewer") &amp;&amp; current.correlation_id == ''</condition>
+        <condition>current.state == -9 /* ERROR */   &amp;&amp;  gs.hasRole("x_brb_work_order.reviewer") &amp;&amp; current.correlation_id == ''</condition>
         <form_action>true</form_action>
         <form_button>true</form_button>
         <form_button_v2>false</form_button_v2>
@@ -28,7 +28,18 @@
         <order>100</order>
         <script><![CDATA[// Call WorkOrderRestUtils Send Dispatch which will handle
 var rest = new WorkOrderRestUtils();
-rest.sendDispatch(current.sys_id);
+var success = rest.sendDispatch( current.sys_id );
+
+// Update Work Order State
+if(success){
+	current.state = 2; /* Work In Progress*/
+	current.update();
+}
+else {
+	current.state = -9; /* Error */
+	current.update();
+}
+
 action.setRedirectURL(current);]]></script>
         <show_insert>false</show_insert>
         <show_multiple_update>false</show_multiple_update>
@@ -41,7 +52,7 @@ action.setRedirectURL(current);]]></script>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>4d13cb34db3d3740a3b74672399619a8</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>Resend REST</sys_name>
         <sys_overrides/>
         <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
@@ -50,7 +61,7 @@ action.setRedirectURL(current);]]></script>
         <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
         <sys_update_name>sys_ui_action_4d13cb34db3d3740a3b74672399619a8</sys_update_name>
         <sys_updated_by>greg.brubaker</sys_updated_by>
-        <sys_updated_on>2019-05-31 13:56:51</sys_updated_on>
+        <sys_updated_on>2019-06-26 14:48:30</sys_updated_on>
         <table>x_brb_work_order_table</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

@@ -40,7 +40,7 @@
         <field>state</field>
         <field_list/>
         <filter table="x_brb_work_order_table">active=true^assignment_group=8eff0ab3db993700a3b7467239961914<item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
-            <item display_table="sys_user_group" display_value="Insight Dispatch" endquery="false" field="assignment_group" goto="false" newquery="false" operator="=" or="false" value="8eff0ab3db993700a3b7467239961914"/>
+            <item endquery="false" field="assignment_group" goto="false" newquery="false" operator="=" or="false" value="8eff0ab3db993700a3b7467239961914"/>
         </filter>
         <from/>
         <funnel_neck_percent>30</funnel_neck_percent>

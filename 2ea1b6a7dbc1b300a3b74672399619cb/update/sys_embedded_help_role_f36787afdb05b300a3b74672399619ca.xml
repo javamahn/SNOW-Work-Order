@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
     <sys_embedded_help_role action="INSERT_OR_UPDATE">
         <order>1000</order>
-        <role display_value="sn_dd_workorder_securitymanagement" name="sn_dd_workorder_securitymanagement">3b6787afdb05b300a3b74672399619c8</role>
+        <role display_value="">3b6787afdb05b300a3b74672399619c8</role>
         <sys_class_name>sys_embedded_help_role</sys_class_name>
         <sys_created_by>stephen.anderson</sys_created_by>
         <sys_created_on>2019-05-02 19:20:10</sys_created_on>
