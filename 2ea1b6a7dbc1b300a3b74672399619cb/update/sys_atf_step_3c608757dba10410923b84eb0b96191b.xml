@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_step">
+    <sys_atf_step action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <copied_from/>
+        <description>Insert a record into 'x_brb_work_order_table' with the following values:
+Assignment group = Insight Dispatch
+and State = Draft
+and Priority = 3 - Moderate
+and Work Type = Desktop/User Device
+and Request Type = Move
+and Preferred Start Date = 12-11-2019 07:00:00 AM
+and Technical Contact = Greg Brubaker(internal)
+and Technical Contact Phone = (407) 697-3246
+and Short description = ATF - Testing
+and Description = Testing ATF REST functionality - TEST RECORD
+and Location = 025-00 - Corporate HQ
+and Bill Address = 220 S. Ridgewood Ave.&#13;
+Daytona Beach, FL 32114
+and Local Contact = Greg Brubaker(internal)
+and Local Contact Phone = 407-697-3246
+and Delivery Address Same As Billable = Yes
+and Delivery Address Street = 220 S. Ridgewood Ave.
+and Delivery Address Suite =
+and Delivery Address City = Daytona Beach
+and Delivery Address State/Province = FL
+and Delivery Address Zip/Postal Code = 32114
+Confirm the record was successfully inserted</description>
+        <display_name>Record Insert</display_name>
+        <inputs/>
+        <mugshots_cache_json/>
+        <notes/>
+        <order>1</order>
+        <snapshot/>
+        <step_config display_value="Record Insert">14872288df60220062fe6c7a4df26319</step_config>
+        <sys_class_name>sys_atf_step</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-12-11 17:05:14</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>3c608757dba10410923b84eb0b96191b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record Insert</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_atf_step_3c608757dba10410923b84eb0b96191b</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
+        <table>x_brb_work_order_table</table>
+        <test display_value="REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
+        <timeout/>
+        <warning_message/>
+    </sys_atf_step>
+    <sys_variable_value action="delete_multiple" query="document_key=3c608757dba10410923b84eb0b96191b"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_atf_step</document>
+        <document_key>3c608757dba10410923b84eb0b96191b</document_key>
+        <order>400</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-12-11 17:05:14</sys_created_on>
+        <sys_id>6d138757dba10410923b84eb0b96193a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
+        <value>assignment_group=0b6c00c3dbb53300923b84eb0b9619f4^state=-5^priority=3^work_type=1^request_type=1^expected_start=12-11-2019 12:00:00 AM^opened_by=72a5e7ba1b4db3403ed30dc2cd4bcb31^technical_contact_phone=(407) 697-3246^short_description=ATF - Testing^description=Testing ATF REST functionality - TEST RECORD^location=b2c80fb113b4f20084a3f6e2e144b09a^u_string_1=220 S. Ridgewood Ave.&#13;
+Daytona Beach, FL 32114^local_contact=72a5e7ba1b4db3403ed30dc2cd4bcb31^local_contact_phone=407-697-3246^delivery_address_same_as_billable=1^delivery_address_street=220 S. Ridgewood Ave.^delivery_address_suite=^delivery_address_city=Daytona Beach^delivery_address_state_province=FL^delivery_address_zip_postal_code=32114^EQ</value>
+        <variable display_value="">dd54cf535320220002c6435723dc34fd</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_atf_step</document>
+        <document_key>3c608757dba10410923b84eb0b96191b</document_key>
+        <order>200</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-12-11 17:05:14</sys_created_on>
+        <sys_id>a9138757dba10410923b84eb0b96193a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
+        <value>x_brb_work_order_table</value>
+        <variable display_value="">90144b535320220002c6435723dc3488</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_atf_step</document>
+        <document_key>3c608757dba10410923b84eb0b96191b</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-12-11 17:05:14</sys_created_on>
+        <sys_id>e5138757dba10410923b84eb0b96193a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
+        <value>1</value>
+        <variable display_value="">e6e3c7535320220002c6435723dc3496</variable>
+    </sys_variable_value>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_atf_step</document>
+        <document_key>3c608757dba10410923b84eb0b96191b</document_key>
+        <order>100</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-12-11 17:05:14</sys_created_on>
+        <sys_id>ed138757dba10410923b84eb0b961939</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
+        <value>record_successfully_inserted</value>
+        <variable display_value="">9024a37f671003007ba405225685efe5</variable>
+    </sys_variable_value>
+</record_update>
