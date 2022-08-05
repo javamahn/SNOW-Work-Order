@@ -1,0 +1,1408 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>false</active>
+        <api_name>x_brb_work_order.WarehouseUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>WarehouseUtils</name>
+        <script><![CDATA[// jshint maxerr:200
+var WarehouseUtils = Class.create();
+WarehouseUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+	GetQueryA: function() {
+		return "EVALUATE('Organizational Hierarchy') ORDER BY [Profit Center Number]";
+	},
+	
+	GetQueryB: function() {
+		return "EVALUATE('Leadership Roles') ORDER BY [Profit Center Number]";
+	},
+	
+	RunQuery: function(queryString, resultType) {
+		gs.info("Warehouse Utils - RunQuery( " + queryString + " , " + resultType + ")");
+		var output = {};
+		output.type = resultType;
+		
+		try {
+			var midServerName = this.GetMidServerName();
+			var psUtil = new x_brb_warehouse.PowershellUtils(midServerName,"127.0.0.1");
+			
+			//Escape characters
+			queryString = queryString.replace(/\$/g,"`$").replace(/"/g,'`"');
+			
+			var script = '& "' + this.GetMidServerScriptPath() + '\\QueryAAS.ps1" -dax "' + queryString + '" -output "JSON"';
+			//var script = '& "C:\\script\\QueryAAS.ps1" -dax "' + queryString + '" -output "JSON"';
+			psUtil.setScript(script);
+			output.script = script;
+			
+			var response = psUtil.execute(true);	
+			
+			//gs.info("Warehouse Utils - RunQuery - response.output.substring(0,1000): \n" + response.output.substring(0,1000));
+			//gs.info("Warehouse Utils - RunQuery - response.error.substring(0,1000): \n" + response.error.substring(0,1000));
+			
+			gs.info("Warehouse Utils - RunQuery - JSON.stringify(response).substring(0,1000): \n" + JSON.stringify(response).substring(0,1000));
+			
+			if(typeof(response.output) == 'undefined' || response.output == '' || response.output == 'null' || !response.output /* un-truthy such as null */ ){
+				//output.result = {};
+				//output.result.data = {};
+				//output.result.data.query = queryString;
+				output.error = response.error;
+			}
+			else {
+				output.result = JSON.parse(response.output);
+				output.error = '';
+			}
+		}
+		catch(ex) {
+			var errorStr = "Warehouse Utils - RunQuery - Error: " + ex.message + " (line number: " + ex.lineNumber + " )" + " [source name: " + ex.sourceName + " ]";
+			gs.error(errorStr);
+			//output.result = {};
+			//output.result.data = {};
+			//output.result.data.query = queryString;
+			output.error = errorStr;
+		}
+		
+		return output;
+	},
+	
+	RunQueryJSON: function(queryString, resultType) {
+		if( typeof queryString == 'undefined' || queryString == '' ) { queryString = this.getParameter('sysparm_queryString'); }	
+		if( typeof resultType == 'undefined' || resultType == '' ) { resultType = this.getParameter('sysparm_resultType'); }
+		
+		var data = this.RunQuery(queryString, resultType);
+		var result = JSON.stringify( data );		
+		return result;
+	},
+	
+	
+	ImportCostCenters: function() {
+		gs.info('WarehouseUtils - ImportCostCenters - Started');
+		
+		var costCenters = this.RunQuery("EVALUATE('Cost Center')","JSON").result.data;
+		var changed = 0;
+		
+		for(var i = 0; i < costCenters.length; i++) {
+			var costCenter = costCenters[i];
+			
+			var cc = new GlideRecord('cmn_cost_center');
+			cc.addQuery('u_reference_id', costCenter.referenceID);
+			cc.query();
+			
+			//referenceID
+			var code = costCenter.CostCenterID;
+			if(code.length < 3){ code = ('000' + code).slice(-3); } // Pad Left with 0's if less than 3 characters
+			var name = code + ' - '  + costCenter.CostCenterName;
+			
+			if(cc.next()){
+				
+				var changes = 0;
+				
+				if(cc.name != name){cc.name = name; changes++;}
+				if(cc.code != code){cc.code = code; changes++;}
+				if(!cc.u_active){ cc.u_active = true; changes++;}
+				
+				if(changes > 0){
+					gs.info('WarehouseUtils - ImportCostCenters - Updated: {reference: ' + costCenter.referenceID + ', code: ' + code + ', name: ' + name + '}');
+					cc.update();
+					changed++;
+				}
+			}			
+		}
+		
+		gs.info('WarehouseUtils - ImportCostCenters - Warehouse Cost Centers: ' + costCenters.length + ', SNOW Changed: ' + changed );
+	},
+	
+	GetLocations: function() {
+
+		var output = {};
+		
+		var locationCount = 0;
+		var leaderCount = 0;
+		
+		output.locationCount = 0;
+		output.leaderCount = 0;	
+		
+		try {
+
+			var users = [];
+			var user = new GlideRecord('sys_user');
+			user.addNotNullQuery('user_name');
+			user.query();
+			while(user.next()) {
+				var userData = {};	
+				userData.userName = (user.user_name + '').trim().toLowerCase();
+				userData.sysId = user.sys_id + '';
+
+				users.push(userData);
+			}
+			
+			var regions = {};
+			var region = new GlideRecord('u_regions');
+			region.query();
+			while(region.next()) {
+				regions[region.u_name + ''] = region.sys_id +'';
+			}
+
+			var leader = {};
+			var leaderEmail = "";
+			var profitCenter = {};
+			var filterFunction = function(me,j,arr){ return ( me.userName == leaderEmail ); };
+
+			var profitCenters = this.RunQuery("EVALUATE('Organizational Hierarchy') ORDER BY [Profit Center Number]","JSON").result.data;
+			var leadership = this.RunQuery("EVALUATE('Leadership Roles') ORDER BY [Profit Center Number]","JSON").result.data;
+
+			var stateCodes = this.getStateCodeLookup();
+			var divisionMap = this.getDivisionMap();
+			
+			var activeSiteCodes = [];
+			
+			for(var i = 0; i < profitCenters.length; i++) {
+				profitCenter = profitCenters[i];
+				
+				profitCenter.Profit_Center_Name = this.CleanUnicode(profitCenter.Profit_Center_Name);
+				
+				// Map Division
+				profitCenter.u_division = '';				
+				var divisionValue = divisionMap[profitCenter.Division];
+				if( divisionValue == 'corporate'      ){ profitCenter.u_division = '4319d97e1b7b449099f08734ec4bcb6e'; }
+				else if( divisionValue == 'wholesale' ){ profitCenter.u_division = 'e729dd3e1b7b449099f08734ec4bcbd1'; }
+				else if( divisionValue == 'retail'    ){ profitCenter.u_division = 'ecf8597e1b7b449099f08734ec4bcb24'; }
+				else if( divisionValue == 'programs'  ){ profitCenter.u_division = 'ef3a55fe1b7b449099f08734ec4bcbcd'; }
+				else if( divisionValue == 'services'  ){ profitCenter.u_division = 'f89addfe1b7b449099f08734ec4bcb51'; }
+								
+				// Map Region
+				var slt = profitCenter.SLT;
+				//if(typeof(slt) != 'undefined' && slt != ''){
+					if(slt == "B Brown"){ slt = "B. Brown";}				
+					else if(slt == "P Brown"){ slt = "P. Brown";}
+					profitCenter.u_region = regions[slt];
+				//}
+				//else {
+				//profitCenter.u_region = '';
+				//}
+				
+				profitCenter.u_legal_name = profitCenter.Legal_Entity;
+
+				profitCenter.AccountingLeader = { email: "", sysId: ""};
+				profitCenter.RegionalFinancialOperationsLeader = { email: "", sysId: ""};
+				profitCenter.RegionalInsuranceOperationsLeader = { email: "", sysId: ""};
+				profitCenter.InsuranceOperationsLeader = { email: "", sysId: ""};
+				profitCenter.ProfitCenterLeader = { email: "", sysId: ""};
+
+				profitCenter.locations = [];
+
+				for(var j = 0; j < leadership.length; j++) {
+					leader = leadership[j];				
+
+					if( profitCenter.Profit_Center_Number != '' 
+						&& typeof(leader) != 'undefined' && leader != ''
+						&& typeof(leader.Profit_Center_Number) != 'undefined' && leader.Profit_Center_Number != ''						
+						&& typeof(leader.Work_Email) != 'undefined' && leader.Work_Email != '' 
+						&& profitCenter.Profit_Center_Number == leader.Profit_Center_Number) {
+
+						leaderEmail = leader.Work_Email.trim().toLowerCase();
+						var userMatches = users.filter(filterFunction);
+
+						if(leader.Role_Description == "Accounting Leader") {
+							profitCenter.AccountingLeader.email = leaderEmail;
+							if(userMatches.length > 0){ profitCenter.AccountingLeader.sysId = userMatches[0].sysId;}
+						}
+						else if(leader.Role_Description == "Regional / Financial Operations Leader") {
+							profitCenter.RegionalFinancialOperationsLeader.email = leaderEmail;
+							if(userMatches.length > 0){ profitCenter.RegionalFinancialOperationsLeader.sysId = userMatches[0].sysId;}
+						}
+						else if(leader.Role_Description == "Regional Insurance Operations Leader") {
+							profitCenter.RegionalInsuranceOperationsLeader.email = leaderEmail;
+							if(userMatches.length > 0){ profitCenter.RegionalInsuranceOperationsLeader.sysId = userMatches[0].sysId;}
+						}
+						else if(leader.Role_Description == "Insurance Operations Leader") {
+							profitCenter.InsuranceOperationsLeader.email = leaderEmail;
+							if(userMatches.length > 0){ profitCenter.InsuranceOperationsLeader.sysId = userMatches[0].sysId;}
+						}
+						else if(leader.Role_Description == "Profit Center Leader") {
+							profitCenter.ProfitCenterLeader.email = leaderEmail;
+							if(userMatches.length > 0){ profitCenter.ProfitCenterLeader.sysId = userMatches[0].sysId;}
+						}
+						
+						leaderCount++;
+					}
+				}
+				
+				profitCenter.u_accounting_leader = profitCenter.AccountingLeader.sysId;
+				profitCenter.u_regional_financial_operations_leader = profitCenter.RegionalFinancialOperationsLeader.sysId;
+				profitCenter.u_regional_insurance_operations_leader = profitCenter.RegionalInsuranceOperationsLeader.sysId;
+				profitCenter.u_insurance_operations_leader = profitCenter.InsuranceOperationsLeader.sysId;
+				profitCenter.u_profit_center_leader = profitCenter.ProfitCenterLeader.sysId;
+				profitCenter.u_pcnumber = ('000' + profitCenter.Profit_Center_Number).slice(-3);
+				
+				profitCenter.hasDuplicate = false;
+				profitCenter.hasNew = false;
+				
+				profitCenter.active = (profitCenter.Inactive == 'False');
+				
+				profitCenter.current_active = false;
+				profitCenter.deactivating = false;
+				profitCenter.reactivating = false;
+				profitCenter.isNew = true;
+				profitCenter.import_notes = '';
+			}
+			
+			
+			profitCenter = new GlideRecord('u_profit_center');
+			profitCenter.addQuery('u_pcnumber','!=','');
+			profitCenter.orderBy('u_pcnumber');
+			profitCenter.query();
+			
+			var pcNumber = '';
+			var filterFunctionPC = function(me,j,arr){ return ( me.u_pcnumber == pcNumber ); };
+			
+			while(profitCenter.next()){
+				pcNumber = profitCenter.u_pcnumber + '';
+				
+				var matchPc = profitCenters.filter(filterFunctionPC);
+				
+// 				if(pcNumber == '667'){
+// 					gs.info(' debug 1) -- get pc -- 667 (count: ' + matchPc.length + ' )' );
+// 				}
+				
+				if(matchPc.length > 0) {
+					var currentPC = matchPc[0];
+					currentPC.current_active = (typeof(profitCenter.u_active) !='undefined' && ( profitCenter.u_active.toString() == 'true' ));
+					
+					currentPC.import_notes = profitCenter.u_import_notes + '';
+					currentPC.sys_id = profitCenter.sys_id + '';
+					
+					if(currentPC.current_active != currentPC.active) {
+						if(currentPC.active  /* Warehouse Active */) {
+							// Reactivating
+							currentPC.reactivating = true;
+						}
+						else {
+							currentPC.deactivating = true;
+						}
+					}
+					
+					//if(pcNumber == '667') {
+					//	gs.info(' debug 2) -- pc -- 667 (current_active: ' + currentPC.current_active + ', new active: ' + currentPC.active +', deactivating: ' + currentPC.deactivating + ' )' );
+					//}
+					currentPC.isNew = false;
+				}
+
+			}
+
+			//Populate Existing Location Data
+			var locationLookup = {};
+			var locationLookupSuffix = {};
+			var locationLookupOverrideActive = {};
+			//var locationLookupCurrentName = {};
+			//var locationLookupCurrentStreet = {};
+			//var locationLookupCurrentCity = {};
+			//var locationLookupCurrentState = {};
+			//var locationLookupCurrentZip = {};
+			//var locationLookupCurrentPrimaryFlag = {};
+			//var locationLookupCurrentDivisionValue = {};
+			var companyLocation = new GlideRecord('cmn_location');
+			companyLocation.query();		
+			while(companyLocation.next()) {
+				var u_site_code = companyLocation.u_site_code.toString();
+				locationLookup[u_site_code] = companyLocation.sys_id.toString();
+				locationLookupSuffix[u_site_code] = companyLocation.u_suffix.toString();
+				locationLookupOverrideActive[u_site_code] = (companyLocation.u_import_override_active.toString() == 'true');
+				
+				//locationLookupCurrentName[u_site_code] = companyLocation.name.toString();
+				//locationLookupCurrentStreet[u_site_code] = companyLocation.street.toString();
+				//locationLookupCurrentCity[u_site_code] = companyLocation.city.toString();
+				//locationLookupCurrentState[u_site_code] = companyLocation.state.toString();
+				//locationLookupCurrentZip[u_site_code] = companyLocation.zip.toString();
+				//locationLookupCurrentPrimaryFlag[u_site_code] = (companyLocation.u_primary_location.toString() == 'true');	
+				//locationLookupCurrentDivisionValue[u_site_code] = companyLocation.u_division.toString();
+			}
+			
+			//Get Warehouse Locations
+			var locations = this.RunQuery("EVALUATE('Locations') ORDER BY [PC Number], [Site Code]","JSON").result.data;
+			//EVALUATE('Locations') ORDER BY [PC Number], [Site Code]
+
+			gs.info("Warehouse Utils - GetLocations - Locations: " + locations.length );
+			var location = {};
+			for( i = 0; i < profitCenters.length; i++) {
+				profitCenter = profitCenters[i];
+
+				for( j = 0; j < locations.length; j++) {				
+					location = locations[j];
+
+					if( (profitCenter.Profit_Center_Number == location.PC_Number) && (location.Inactive == "False") ) {
+
+						var loc = {};
+						//loc.u_site_code = location.PC_Number.padStart(3,'0') + "-" + location.Site_Code;
+						
+						loc.name = "";
+
+						loc.u_pcnumber_1 = ('000' + location.PC_Number).slice(-3);
+						loc.u_site_code = ('000' + location.PC_Number).slice(-3) + "-" + location.Site_Code;
+						loc.u_division = divisionMap[profitCenter.Division];
+						
+						// Map Region
+						loc.u_region = profitCenter.SLT;
+						if(loc.u_region == "B Brown"){ loc.u_region = "B. Brown";}
+						
+						if(location.Primary_Flag == "True"){
+							loc.name = loc.u_site_code + " - " + profitCenter.Profit_Center_Name;
+						}
+						else {
+							loc.name = loc.u_site_code + " - " + profitCenter.Profit_Center_Name  + " - " + location.City;
+						}
+						
+						loc.u_suffix = locationLookupSuffix[loc.u_site_code];						
+						if(typeof(loc.u_suffix) != 'undefined' && loc.u_suffix != '') {
+							loc.name = loc.name + " - " + loc.u_suffix;
+						}
+						
+						loc.street = location.Primary_Address;
+						loc.u_suite = location.Suite;
+						loc.city = location.City;
+						
+						// Map State
+						if(location.State && stateCodes[location.State]) {
+							loc.state = stateCodes[location.State];
+						}
+						else {
+							loc.state = location.State;
+						}
+						
+						loc.zip = location.Postal_Code;
+						
+						loc.country = location.Country;
+						if(loc.country == 'United States of America') { loc.country = 'USA'; }
+						
+						loc.u_primary_location = (location.Primary_Flag == "True");
+						loc.u_active = (location.Inactive == "False");
+						
+						loc.u_profit_center_leader = profitCenter.ProfitCenterLeader.sysId;
+						loc.u_accounting_leader = profitCenter.AccountingLeader.sysId;
+						loc.u_regional_financial_operations_leader = profitCenter.RegionalFinancialOperationsLeader.sysId;
+						loc.u_insurance_operations_leader = profitCenter.InsuranceOperationsLeader.sysId;
+						loc.u_regional_insurance_operations_leader = profitCenter.RegionalInsuranceOperationsLeader.sysId;
+						
+						loc.reference_id = location.Worktag_Reference_ID;
+						
+						//loc.u_legal_name = profitCenter.Legal_Entity;
+						
+						loc.sys_id = locationLookup[loc.u_site_code];
+						loc.u_import_override_active = locationLookupOverrideActive[loc.u_site_code];
+
+						profitCenter.locations.push(loc);
+						if(loc.u_active){
+							activeSiteCodes.push(loc.u_site_code);
+						}
+						
+						locationCount++;
+					}
+				}
+			}
+			
+			gs.info("Warehouse Utils - GetLocations - Analyze Locations - Started");
+			var dupTotal = 0;
+			var newTotal = 0;
+			// Analyze Duplicate Locations
+			for( i = 0; i < profitCenters.length; i++) {
+				profitCenter = profitCenters[i];
+				var dups = this.MarkLocationDuplicates(profitCenter.locations);
+				var newLocs = this.MarkNewLocations(profitCenter.locations);
+				dupTotal += dups;
+				newTotal += newLocs;
+				if(dups > 0) {
+					profitCenter.hasDuplicate = true;
+				}
+				if(newLocs > 0) {
+					profitCenter.hasNew = true;
+				}				
+			}
+			gs.info("Warehouse Utils - GetLocations - Analyze Locations - Completed - Dups: " + dupTotal + " New: " + newTotal);
+			
+			output.profitCenters = profitCenters;
+			
+			//output.locations = locations;
+			
+			// -- Deactivations & Reactivations --
+			location = new GlideRecord('cmn_location');
+			location.addQuery('u_site_code','!=','');
+			location.orderBy('u_site_code');
+			location.query();
+			
+			var siteCode = "";		
+			var deactivations = [];
+			var reactivations = [];
+			var snowLocationDuplicates = [];
+			var checkForChanges = [];
+			filterFunction = function(me,j,arr){ return ( me == siteCode ); };
+			
+			var lastSiteCode;
+			var lastLoc = {};
+			
+			while(location.next()) {
+				lastSiteCode = siteCode;				
+				siteCode = location.u_site_code.toString();
+				
+				var activeLocationMatches = activeSiteCodes.filter(filterFunction);
+				var warehouseActive = !(activeLocationMatches.length == 0);
+				var locActive = (location.u_active.toString() == 'true');
+				
+				//gs.info("Warehouse Utils - GetLocations - Deactivations & Reactivations - " + siteCode + " ( location.u_active.toString() : " + location.u_active.toString() + " )");
+				//gs.info("Warehouse Utils - GetLocations - Deactivations & Reactivations - " + siteCode + " ( warehouseActive : " + warehouseActive + " , locActive: " + locActive + " , Differ: " + (warehouseActive != locActive) + " )");
+				
+				loc = {};
+				loc.sys_id = location.sys_id + '';
+				loc.u_site_code = location.u_site_code + '';
+				loc.name = location.name + '';
+				loc.u_active = locActive;
+				loc.u_primary_location = (location.u_primary_location + '' == 'true');
+				loc.street = location.street + '';
+				loc.city = location.city + '';
+				loc.state = location.state + '';
+				loc.zip = location.zip + '';
+				loc.country = location.country + '';
+				
+				loc.u_import_override_active = (location.u_import_override_active + '' == 'true');
+
+				loc.u_import_notes = '';
+				if(!location.u_import_notes.nil()) {
+					loc.u_import_notes = location.u_import_notes + '';
+				}
+				
+				loc.new_ProfitCenterLeader = { email: "", sysId: ""};
+				loc.new_AccountingLeader = { email: "", sysId: ""};
+				loc.new_RegionalFinancialOperationsLeader = { email: "", sysId: ""};
+				loc.new_RegionalInsuranceOperationsLeader = { email: "", sysId: ""};
+				loc.new_InsuranceOperationsLeader = { email: "", sysId: ""};
+				
+				loc.ProfitCenterLeader = { email: "", sysId: ""};
+				loc.AccountingLeader = { email: "", sysId: ""};
+				loc.RegionalFinancialOperationsLeader = { email: "", sysId: ""};
+				loc.RegionalInsuranceOperationsLeader = { email: "", sysId: ""};
+				loc.InsuranceOperationsLeader = { email: "", sysId: ""};
+				
+				if(!location.u_profit_center_leader.nil()) { 
+					loc.ProfitCenterLeader.email = location.u_profit_center_leader.user_name + '';
+					loc.ProfitCenterLeader.sysId = location.u_profit_center_leader.sys_id + ''; 
+				}
+				
+				if(!location.u_accounting_leader.nil()) {
+					loc.AccountingLeader.email = location.u_accounting_leader.user_name + '';
+					loc.AccountingLeader.sysId = location.u_accounting_leader.sys_id + '';
+				}
+				
+				if(!location.u_regional_financial_operations_leader.nil()) {
+					loc.RegionalFinancialOperationsLeader.email = location.u_regional_financial_operations_leader.user_name + '';
+					loc.RegionalFinancialOperationsLeader.sysId = location.u_regional_financial_operations_leader.sys_id + '';
+				}
+				
+				if(!location.u_insurance_operations_leader.nil()) {
+					loc.InsuranceOperationsLeader.email = location.u_insurance_operations_leader.user_name + '';
+					loc.InsuranceOperationsLeader.sysId = location.u_insurance_operations_leader.sys_id + '';
+				}
+				
+				if(!location.u_regional_insurance_operations_leader.nil()) {
+					loc.RegionalInsuranceOperationsLeader.email = location.u_regional_insurance_operations_leader.user_name + '';
+					loc.RegionalInsuranceOperationsLeader.sysId = location.u_regional_insurance_operations_leader.sys_id + '';
+				}
+
+				loc.u_division = location.u_division + '';
+				loc.u_region = location.u_region.u_name + '';
+				
+					
+				// Some defaults - overwritten for reactivations
+				loc.new_name = '';
+				loc.new_u_active = false;
+				loc.new_u_primary_location = '';
+				loc.new_street = '';
+				loc.new_city = '';
+				loc.new_state = '';
+				loc.new_zip = '';
+				
+				loc.new_u_region = '';
+				loc.new_u_division = '';
+				
+				if(warehouseActive != locActive) { /* changing, based on presence in active warehouse list, vs currently value of u_active */
+					
+					if(!locActive /* becoming active, currently inactive */ ){
+						reactivations.push(loc);
+					}
+					else { /* becoming inactive */
+						
+						pcNumber = location.u_pcnumber_1.toString();
+						if(pcNumber >= '300' && pcNumber <= '399') {
+							// Do Nothing
+						}
+						else {
+							// Deactivating
+							// Deactivations are not in the new Warehouse data, so we use the location information
+							deactivations.push(loc);
+						}
+					}
+				}
+				else if(warehouseActive || locActive){
+				//else {
+					checkForChanges.push(loc);	// Screens still for possibly being a change in other ways
+				}
+				
+				if(lastSiteCode == siteCode){
+					snowLocationDuplicates.push(loc);
+					snowLocationDuplicates.push(lastLoc);
+				}
+				
+				lastLoc = loc;
+				
+			}
+			
+			// -- For Reactivations add info from the warehouse data --
+			
+			for( i = 0; i < profitCenters.length; i++) {
+				profitCenter = profitCenters[i];
+				
+				filterFunction = function(me,j,arr){ return ( me.u_site_code == location.u_site_code ); };
+				
+				for( j = 0; j < profitCenter.locations.length; j++) {				
+					location = profitCenter.locations[j];
+					
+					var reactivationMatches = reactivations.filter(filterFunction);
+					var checkForChangesMatches = checkForChanges.filter(filterFunction);
+					
+					if(reactivationMatches.length > 0){
+						loc = reactivationMatches[0];
+						
+						loc.reference_id = location.reference_id;
+
+						loc.new_name = location.name + '';
+						loc.new_u_active = location.u_active;
+						loc.new_u_primary_location = location.u_primary_location;
+						loc.new_street = location.street;
+						loc.new_city = location.city;
+						loc.new_state = location.state;
+						loc.new_zip = location.zip;
+						loc.new_country = location.country;
+						
+						loc.new_ProfitCenterLeader = profitCenter.ProfitCenterLeader;		
+						loc.new_AccountingLeader = profitCenter.AccountingLeader;
+						loc.new_RegionalFinancialOperationsLeader = profitCenter.RegionalFinancialOperationsLeader;
+						loc.new_RegionalInsuranceOperationsLeader = profitCenter.RegionalInsuranceOperationsLeader;
+						loc.new_InsuranceOperationsLeader = profitCenter.InsuranceOperationsLeader;
+					}
+					else if(checkForChangesMatches.length > 0){
+						loc = checkForChangesMatches[0];
+
+						loc.reference_id = location.reference_id;
+						
+						loc.new_name = location.name + '';
+						loc.new_u_active = location.u_active;
+						loc.new_u_primary_location = location.u_primary_location;
+						loc.new_street = location.street;
+						loc.new_city = location.city;
+						loc.new_state = location.state;
+						loc.new_zip = location.zip;
+						loc.new_country = location.country;
+						
+						loc.new_ProfitCenterLeader = profitCenter.ProfitCenterLeader;
+						loc.new_AccountingLeader = profitCenter.AccountingLeader;
+						loc.new_RegionalFinancialOperationsLeader = profitCenter.RegionalFinancialOperationsLeader;
+						loc.new_RegionalInsuranceOperationsLeader = profitCenter.RegionalInsuranceOperationsLeader;
+						loc.new_InsuranceOperationsLeader = profitCenter.InsuranceOperationsLeader;
+						
+						loc.new_u_region = location.u_region;
+						loc.new_u_division = location.u_division;
+					}
+				}
+			}
+			
+			
+			var changes = [];
+			
+			for( i = 0; i < checkForChanges.length; i++) {
+				loc = checkForChanges[i];
+				
+				if(loc.name != loc.new_name) { changes.push(loc); }
+				else if(loc.u_active != loc.new_u_active) { changes.push(loc); }
+				else if(loc.u_primary_location != loc.new_u_primary_location) { changes.push(loc); }
+				else if(loc.street != loc.new_street) { changes.push(loc); }
+				else if(loc.city != loc.new_city) { changes.push(loc); }
+				else if(loc.state != loc.new_state) { changes.push(loc); }
+				else if(loc.zip != loc.new_zip) { changes.push(loc); }
+				else if(loc.country != loc.new_country) { changes.push(loc); }
+				
+				else if(loc.u_division != loc.new_u_division) { changes.push(loc); }
+				else if(loc.u_region != loc.new_u_region) { changes.push(loc); }
+				
+// 				else if(loc.ProfitCenterLeader.sysId != loc.new_ProfitCenterLeader.sysId) { changes.push(loc); }
+// 				else if(loc.AccountingLeader.sysId != loc.new_AccountingLeader.sysId) { changes.push(loc); }
+// 				else if(loc.RegionalFinancialOperationsLeader.sysId != loc.new_RegionalFinancialOperationsLeader.sysId) { changes.push(loc); }
+// 				else if(loc.RegionalInsuranceOperationsLeader.sysId != loc.new_RegionalInsuranceOperationsLeader.sysId) { changes.push(loc); }
+// 				else if(loc.InsuranceOperationsLeader.sysId != loc.new_InsuranceOperationsLeader.sysId) { changes.push(loc); }
+				
+				else if(loc.ProfitCenterLeader.sysId != loc.new_ProfitCenterLeader.sysId && loc.new_ProfitCenterLeader.email) { changes.push(loc); }
+				else if(loc.AccountingLeader.sysId != loc.new_AccountingLeader.sysId && loc.new_AccountingLeader.email) { changes.push(loc); }
+				else if(loc.RegionalFinancialOperationsLeader.sysId != loc.new_RegionalFinancialOperationsLeader.sysId && loc.new_RegionalFinancialOperationsLeader.email) { changes.push(loc); }
+				else if(loc.RegionalInsuranceOperationsLeader.sysId != loc.new_RegionalInsuranceOperationsLeader.sysId && loc.new_RegionalInsuranceOperationsLeader.email) { changes.push(loc); }
+				else if(loc.InsuranceOperationsLeader.sysId != loc.new_InsuranceOperationsLeader.sysId && loc.new_InsuranceOperationsLeader.email) { changes.push(loc); }
+			}
+			
+			output.deactivations = deactivations;
+			output.reactivations = reactivations;
+			output.changes = changes;
+			output.duplicates = snowLocationDuplicates;
+			
+		}
+		catch(ex){
+			var errorStr = "Warehouse Utils - GetLocations - Error: " + ex.message + " (line number: " + ex.lineNumber + " )" + " [source name: " + ex.sourceName + " ]";
+			gs.error(errorStr);
+			output.errorMessage = errorStr;
+		}
+		
+		output.locationCount = locationCount;
+		output.leaderCount = leaderCount;	
+		
+		return output;
+	},
+	
+	GetLocationsJSON: function() {
+		var data = this.GetLocations();
+		var result = JSON.stringify( data );		
+		return result;
+	},
+	
+	
+	MarkLocationDuplicates: function(locations) {
+		
+		var siteCodes = [];
+		for(var i = 0; i < locations.length; i++) {
+			siteCodes.push(locations[i].u_site_code);
+		}
+		
+		var duplicateSiteCodes = siteCodes
+									.sort()
+									.filter( function(me,i,arr){ return (i!==0) && ( me == arr[i-1] ); }) /* Find Duplicates */
+									.filter( function(me,i,arr){ return (i===0) || ( me !== arr[i-1] ); }) /* Then Make Unique */;
+			
+		for(i = 0; i < locations.length; i++) {
+			
+			locations[i].DuplicateSiteCode = false;
+			
+			for(var j = 0; j < duplicateSiteCodes.length; j++) {
+				if(locations[i].u_site_code == duplicateSiteCodes[j]) {
+					locations[i].DuplicateSiteCode = true;
+				}
+			}
+		}
+		
+		return duplicateSiteCodes.length;
+	},	
+	
+	
+	MarkNewLocations: function(locations) {
+		
+		var newCount = 0;
+		
+		for(var i = 0; i < locations.length; i++) {			
+			locations[i].isNew = false;
+			
+			if(typeof(locations[i].sys_id) == 'undefined' || locations[i].sys_id == '') { /* Locations that don't yet exist */
+				locations[i].isNew = true;
+				newCount++;
+			}
+		}
+		
+		return newCount;
+	},
+	
+	
+	RunLocationImport: function() {
+		
+		this.SetImportStatus(100,"Query Azure Analysis Services");
+		// Get Locations - 100
+		var data = this.GetLocations();		
+		var activeSiteCodes = [];
+		
+		var inserted = 0;
+		var updated = 0;
+		var deactivated = 0;
+		var skipped = 0;
+		var unknown = 0;
+		var warehouseInactiveSkippedLocations = 0;
+		var resultSysId = '';
+		var importSetRow = [];
+		var status = '';
+
+		var pcInserted = 0;
+		var pcUpdated = 0;
+		var pcWarehouseInactiveSkipped = 0;
+		var pcSkipped = 0;
+		var pcUnknown = 0;
+		
+		
+		if(typeof(data) == 'undefined' || typeof(data.profitCenters) == 'undefined' || data.profitCenters.length == 0  ){
+			gs.error("Warehouse Utils - RunLocationImport - GetLocations Returned No PC Data - Check MID Server - (Leader: " + data.leaderCount + ", Locations: " + data.locationCount + ")");
+			this.SetImportStatus(-110,"Query Error - GetLocations Returned No PC Data - Check MID Server & Logs");
+		}
+		else {
+
+			gs.info("Warehouse Utils - RunLocationImport - Started - GetLocations Returned - Records (Leader: " + data.leaderCount + ", Locations: " + data.locationCount + ")");
+
+			this.SetImportStatus(210,"Backup Locations");
+			// Backup Location Data (Insert Current into History)
+			this.RunLocationBackup();
+			this.SetImportStatus(220,"Backup Profit Centers");
+			this.RunProfitCenterBackup();
+			
+
+			// Handle Dups?
+			
+			this.SetImportStatus(300,"Import");
+			
+			var importSet = {};
+
+			for(var i = 0; i < data.profitCenters.length; i++) {			
+				var pc = data.profitCenters[i];
+								
+				// Update PC
+				var pcImportSet = new GlideRecord('x_brb_warehouse_profit_center_import_set');
+				pcImportSet.initialize();
+				
+				// Set Values
+				pcImportSet.u_pcnumber = pc.u_pcnumber;
+				pcImportSet.u_name = pc.u_pcnumber + ' - ' + pc.Profit_Center_Name;
+				
+				pcImportSet.u_legal_name = pc.u_legal_name;
+
+				pcImportSet.u_division = pc.u_division;
+				pcImportSet.u_region = pc.u_region;
+				
+				// PC Profile ???
+				
+// 				pcImportSet.u_profit_center_leader = pc.u_profit_center_leader;
+// 				pcImportSet.u_accounting_leader = pc.u_accounting_leader;
+// 				pcImportSet.u_insurance_operations_leader = pc.u_insurance_operations_leader;
+// 				pcImportSet.u_regional_financial_operations_leader = pc.u_regional_financial_operations_leader;
+// 				pcImportSet.u_regional_insurance_operations_leader = pc.u_regional_insurance_operations_leader;
+				
+				pcImportSet.u_profit_center_leader = pc.u_profit_center_leader;
+				pcImportSet.u_accounting_leader = pc.u_accounting_leader;
+				pcImportSet.u_insurance_operations_leader = pc.u_insurance_operations_leader;
+				pcImportSet.u_regional_fin_rations_leader = pc.u_regional_financial_operations_leader;
+				pcImportSet.u_regional_ins_rations_leader = pc.u_regional_insurance_operations_leader;
+				
+				gs.info("Warehouse Utils - RunLocationImport - PC - " + pc.u_pcnumber + "\n"
+					+ "u_pcnumber:  " + pcImportSet.u_pcnumber + "\n"
+					+ "u_name: " + pcImportSet.u_name + "\n"
+					+ "u_division: " + pcImportSet.u_division + "\n"
+					+ "u_region: " + pcImportSet.u_region + "\n"
+					+ "u_active: " + pcImportSet.u_active + "\n"
+					+ "u_profit_center_leader: " + pcImportSet.u_profit_center_leader + "\n"
+					+ "u_accounting_leader: " + pcImportSet.u_accounting_leader + "\n"
+					+ "u_insurance_operations_leader: " + pcImportSet.u_insurance_operations_leader + "\n"
+					+ "u_regional_financial_operations_leader: " + pcImportSet.u_regional_fin_rations_leader + "\n"
+					+ "u_regional_insurance_operations_leader: " + pcImportSet.u_regional_ins_rations_leader + "\n"
+				);
+				
+				var importRecords = true;
+				
+				var active = ( pc.Inactive == 'False' );
+				if(!pc.reactivating || pc.locations.length > 0 /* Not Reactivating OR Has Location */){
+					pcImportSet.u_active = active; // Do not set active status if Reactivating and has no locations - May be workday financial Run Off, will be forced to be done manually if so
+				}
+				
+				if(!active /* PC Not Active*/) {
+					
+					// Only Update if it already exists - don't create new inactive entries
+					
+					var pcMatch = new GlideRecord('u_profit_center');
+					pcMatch.addQuery('u_pcnumber', pcImportSet.u_pcnumber);
+					pcMatch.query();
+					
+					if(!pcMatch.next() /* No PC Match Found, And Inactive in Warehouse - Skip*/) {
+						importRecords = false;
+						pcWarehouseInactiveSkipped++;
+					
+						if(pc.locations.length > 0) {
+							warehouseInactiveSkippedLocations += pc.locations.length;
+						}
+						
+						gs.info("Warehouse Utils - RunLocationImport - PC - Warehouse_Inactive_Skipped - " + pc.u_pcnumber);
+					}
+				}
+				
+				if(importRecords) { /* Only Import Profit Center & Locations if PC is active or already exists (Don't load old inactive) */
+
+					var pcResultSysId = pcImportSet.insert();
+
+					var pcImportSetRow = new GlideRecord('x_brb_warehouse_profit_center_import_set');
+					pcImportSetRow.get(pcResultSysId);
+
+					var pcStatus = pcImportSetRow.sys_import_state;
+					if(pcStatus == 'ignored' || pcStatus == 'ignore'){
+						pcSkipped++;
+						gs.info("Warehouse Utils - RunLocationImport - PC - SKIPPED - " + pc.u_pcnumber);
+					}
+					else if (pcStatus == 'updated') {
+						pcUpdated++;
+						gs.info("Warehouse Utils - RunLocationImport - PC - UPDATED - " + pc.u_pcnumber);
+					}
+					else if (pcStatus == 'inserted') {
+						pcInserted++;
+						gs.info("Warehouse Utils - RunLocationImport - PC - INSERTED - " + pc.u_pcnumber);
+					}
+					else {
+						pcUnknown++;
+						gs.error("Warehouse Utils - RunLocationImport - PC - Unpected Import Set State (UEIS-0PC) - Unknown State - [" + pcStatus + "] - for: " + pc.u_pcnumber.toString() );
+					}
+
+
+					if(pc.locations.length == 0) {
+						//
+					}
+					else {			
+						for(var j = 0; j < pc.locations.length; j++) {
+							var loc = pc.locations[j];
+
+							// Update only active Locations - may have inactive dups
+							if(loc.u_active) {
+
+								importSet = new GlideRecord('x_brb_warehouse_location_import_set');
+								importSet.initialize();
+
+								//importSet.LocationSysId = loc.sys_id;
+								importSet.u_name = loc.name;
+								importSet.u_pcnumber_1 = loc.u_pcnumber_1;
+																
+								var u_profit_center = new GlideRecord('u_profit_center');
+								u_profit_center.addQuery('u_pcnumber', loc.u_pcnumber_1);
+								u_profit_center.query();
+								
+								if(u_profit_center.next()){
+									importSet.u_profit_center = u_profit_center.sys_id;
+								}
+								
+								importSet.u_site_code = loc.u_site_code;
+								importSet.u_division = loc.u_division;
+								importSet.u_region = loc.u_region;
+								importSet.u_street = loc.street;
+								importSet.u_suite = loc.u_suite;
+								importSet.u_city = loc.city;
+								importSet.u_state = loc.state;
+								importSet.u_zip = loc.zip;
+								importSet.u_country = loc.country;
+								importSet.u_primary_location = loc.u_primary_location;
+								
+								
+								if(!loc.u_import_override_active /* IF NOT Being Overridden */) {
+									importSet.u_active = loc.u_active;
+								}
+								
+								importSet.u_profit_center_leader = loc.u_profit_center_leader;
+								importSet.u_accounting_leader = loc.u_accounting_leader;
+								importSet.u_regional_fin_rations_leader = loc.u_regional_financial_operations_leader;
+								importSet.u_insurance_operations_leader = loc.u_insurance_operations_leader;
+								importSet.u_regional_ins_rations_leader = loc.u_regional_insurance_operations_leader;
+
+								resultSysId = importSet.insert();
+
+								importSetRow = new GlideRecord('x_brb_warehouse_location_import_set');
+								importSetRow.get(resultSysId);
+								status = importSetRow.sys_import_state;
+								if(status == 'ignored' || status == 'ignore'){
+									skipped++;
+								}
+								else if (status == 'updated') {
+									updated++;
+								}
+								else if (status == 'inserted') {
+									inserted++;
+								}
+								else {
+									unknown++;
+
+									gs.error("Warehouse Utils - RunLocationImport - Location - Unpected Import Set State (UEIS-100) - Unknown State - [" + status + "] - for: " + loc.name.toString() );
+								}
+
+
+								activeSiteCodes.push(importSet.u_site_code);
+							}					
+						}
+					}
+				}
+			}
+		
+			gs.info("Warehouse Utils - RunLocationImport - Location - Section 1 (Skipped: " + skipped + ", Inserted: " + inserted + ", Updated: " + updated + ", Unknown: " + unknown + ", PC WI Skipped Locs: " + warehouseInactiveSkippedLocations + ")");
+			gs.info("Warehouse Utils - RunLocationImport - PC - Section 1 (PC Skipped: " + pcSkipped + ", PC Inserted: " + pcInserted + ", PC Updated: " + pcUpdated + ", PC Unknown: " + pcUnknown + ", PC Warehouse Inactive Skipped : " + pcWarehouseInactiveSkipped + ")");
+
+			this.SetImportStatus(400,"Deactivate Locations");
+			// Find Active SNOW Locations with no Active Warehouse Location
+			var location = new GlideRecord('cmn_location');
+			location.addQuery('u_active',true);
+			location.addQuery('u_import_override_active', false); // Skip entires with active override block
+			location.query();
+
+			var siteCode = "";
+			var filterFunction = function(me,j,arr){ return ( me == siteCode ); };
+
+			while(location.next() ) {
+
+				siteCode = location.u_site_code + '';
+				var activeLocationMatches = activeSiteCodes.filter(filterFunction);
+
+				if(activeLocationMatches.length == 0 /* Active SNOW Location with no Active Warehouse Location */ ) {				
+					
+					var pcNumber = location.u_pcnumber_1.toString();
+					if(pcNumber >= '300' && pcNumber <= '399') {
+						// Do Nothing
+					}
+					else {
+						// Inactivate Location
+
+						importSet = new GlideRecord('x_brb_warehouse_location_import_set');
+						importSet.initialize();
+						
+						importSet.u_site_code = location.u_site_code;
+						//importSet.u_active = location.u_active;
+						
+						importSet.u_active = false;
+						
+						resultSysId = importSet.insert();
+	
+								
+						importSetRow = new GlideRecord('x_brb_warehouse_location_import_set');
+						importSetRow.get(resultSysId);
+						status = importSetRow.sys_import_state;
+						
+						if(status == 'ignored' || status == 'ignore'){
+							// Unexpected - already inactive?
+							gs.error("Warehouse Utils - RunLocationImport - Location - Deactivation - Unexpected Import Set State (UEIS-209) [" + status + "] - for: " + location.name.toString() );
+						}
+						else if (status == 'updated') {
+							deactivated++;
+						}
+						else if (status == 'inserted') {
+							// Unexpected - didn't exist?
+							gs.error("Warehouse Utils - RunLocationImport - Location - Deactivation - Unexpected Import Set State (UEIS-207) [" + status + "] - for: " + location.name.toString() );
+						}
+						else {
+							// Unexpected - unknown
+							gs.error("Warehouse Utils - RunLocationImport - Location - Deactivation - Unexpected Import Set State (UEIS-200) - Unknown State - [" + status + "] - for: " + location.name.toString() );
+						}
+					}
+					
+				} // if active warehouse match
+			} //while
+			
+			gs.info("Warehouse Utils - RunLocationImport - Section 2 (Deactivated: " + deactivated + ")");
+			
+			this.SetImportStatus(800,"Complete");
+		}
+		gs.info("Warehouse Utils - RunLocationImport - Completed (Skipped: " + skipped + ", Inserted: " + inserted + ", Updated: " + updated + ", Deactivated: " + deactivated + ", Unknown: " + unknown + ")");
+		
+	},	
+	
+	RunLocationImportJSON: function() {
+		
+		var data = { message: "started"};
+		
+		try {
+			//this.RunLocationImport();
+			
+			//Execute a scheduled script job
+			var job = new GlideRecord('sysauto_script');
+			job.get('name', 'Location Warehouse Import Job');
+			gs.executeNow(job);
+// 			if (typeof SncTriggerSynchronizer != 'undefined') {
+// 				SncTriggerSynchronizer.executeNow(job);
+// 			}
+// 			else {
+// 				Packages.com.snc.automation.TriggerSynchronizer.executeNow(job);
+// 			}		
+		}		
+		catch(ex){
+			var errorStr = "Warehouse Utils - GetLocations - Error: " + ex.message + " (line number: " + ex.lineNumber + " )" + " [source name: " + ex.sourceName + " ]";
+			gs.error(errorStr);
+			
+			data.errorMessage = errorStr;
+		}
+
+		var result = JSON.stringify( data );		
+		
+		return result;
+	},
+	
+	
+	getStateCodeLookup: function() {
+		
+		var stateCodes = {};
+
+		stateCodes["Alaska" 		] = "AK";
+		stateCodes["Alabama" 		] = "AL";
+		stateCodes["Arkansas" 		] = "AR";
+		stateCodes["Arizona" 		] = "AZ";
+		stateCodes["California" 	] = "CA";
+		stateCodes["Colorado" 		] = "CO";
+		stateCodes["Connecticut" 	] = "CT";
+		stateCodes["Washington DC" 	] = "DC";
+		stateCodes["Delaware" 		] = "DE";
+		stateCodes["Florida" 		] = "FL";
+		stateCodes["Georgia" 		] = "GA";
+		stateCodes["Guam" 			] = "GU";
+		stateCodes["Hawaii" 		] = "HI";
+		stateCodes["Iowa" 			] = "IA";
+		stateCodes["Idaho" 			] = "ID";
+		stateCodes["Illinois" 		] = "IL";
+		stateCodes["Indiana" 		] = "IN";
+		stateCodes["Kansas" 		] = "KS";
+		stateCodes["Kentucky" 		] = "KY";
+		stateCodes["Louisiana" 		] = "LA";
+		stateCodes["Massachusetts" 	] = "MA";
+		stateCodes["Maryland" 		] = "MD";
+		stateCodes["Maine" 			] = "ME";
+		stateCodes["Michigan" 		] = "MI";
+		stateCodes["Minnesota" 		] = "MN";
+		stateCodes["Missouri" 		] = "MO";
+		stateCodes["Mississippi" 	] = "MS";
+		stateCodes["Montana" 		] = "MT";
+		stateCodes["North Carolina"	] = "NC";
+		stateCodes["North Dakota" 	] = "ND";
+		stateCodes["Nebraska" 		] = "NE";
+		stateCodes["New Hampshire" 	] = "NH";
+		stateCodes["New Jersey" 	] = "NJ";
+		stateCodes["New Mexico" 	] = "NM";
+		stateCodes["Nevada" 		] = "NV";
+		stateCodes["New York" 		] = "NY";
+		stateCodes["Ohio" 			] = "OH";
+		stateCodes["Oklahoma" 		] = "OK";
+		stateCodes["Oregon" 		] = "OR";
+		stateCodes["Pennsylvania" 	] = "PA";
+		stateCodes["Puerto Rico" 	] = "PR";
+		stateCodes["Rhode Island" 	] = "RI";
+		stateCodes["South Carolina"	] = "SC";
+		stateCodes["South Dakota" 	] = "SD";
+		stateCodes["Tennessee" 		] = "TN";
+		stateCodes["Texas" 			] = "TX";
+		stateCodes["Utah" 			] = "UT";
+		stateCodes["Virginia" 		] = "VA";
+		stateCodes["Virgin Islands"	] = "VI";
+		stateCodes["Vermont" 		] = "VT";
+		stateCodes["Washington" 	] = "WA";
+		stateCodes["Wisconsin" 		] = "WI";
+		stateCodes["West Virginia" 	] = "WV";
+		stateCodes["Wyoming" 		] = "WY";
+		
+		return stateCodes;
+	},
+	
+	getDivisionMap: function() {
+		
+		var divisions = {};
+
+		divisions["Corporate"] = "corporate";
+		divisions["National Programs"] = "programs";
+		divisions["Retail"] = "retail";
+		divisions["Services"] = "services";
+		divisions["Wholesale Brokerage"] = "wholesale";
+
+		return divisions;
+	},
+	
+	CleanUnicode: function(input) {
+		var output = input;
+		
+		output = output
+					.replace(/[\u2018\u2019]/g, "'") /* Fancy Single Quotes*/
+					.replace(/[\u201C\u201D]/g, '"') /* Fancy Double Quotes*/
+					.replace(/[\u2013\u2014]/g, '-') /* Fancy Dash*/
+					.replace(/[\u2026]/g, '...')     /* Fancy Ellipses*/
+					;
+		
+		return output;
+		
+	},	
+	
+	
+	RunLocationBackup: function() {				
+		
+		var recordCount = 0;
+		
+		// Historic Marker - right now it's just a datetime string, but it could take on more use.  This is becasue the Created Date may differ slightly over time.
+		var date = new GlideDateTime();
+		var historic_marker = date.getDisplayValueInternal();
+		
+		gs.info("Warehouse Utils - RunLocationBackup - " + historic_marker + " - Started");
+		
+		var location = new GlideRecord('cmn_location');
+		location.query();		
+		while(location.next()) {
+			
+			var locationHistoric = new GlideRecord('x_brb_warehouse_location_history');
+			locationHistoric.initialize();
+			
+			locationHistoric.historic_marker = historic_marker;
+			
+			locationHistoric.u_accounting_leader = location.u_accounting_leader;
+			locationHistoric.u_active = location.u_active;
+			locationHistoric.city = location.city;
+			locationHistoric.u_comments = location.u_comments;
+			locationHistoric.company = location.company;
+			locationHistoric.contact = location.contact;
+			locationHistoric.country = location.country;
+			locationHistoric.u_director_of_financial_operations = location.u_director_of_financial_operations;
+			
+			locationHistoric.u_division = location.u_division;
+			
+			locationHistoric.u_divisional_cio = location.u_divisional_cio;
+			locationHistoric.x_brb_work_order_divisional_cio_grp = location.x_brb_work_order_divisional_cio_grp;
+			locationHistoric.u_divisional_cio_designee = location.u_divisional_cio_designee;
+			locationHistoric.fax_phone = location.fax_phone;
+			locationHistoric.full_name = location.full_name;
+
+			locationHistoric.u_insurance_operations_leader = location.u_insurance_operations_leader;
+			locationHistoric.u_it_owner = location.u_it_owner;
+			locationHistoric.lat_long_error = location.lat_long_error;
+			locationHistoric.latitude = location.latitude;
+			locationHistoric.u_it_contact = location.u_it_contact;
+			locationHistoric.longitude = location.longitude;
+			locationHistoric.name = location.name;
+			locationHistoric.parent = location.parent;
+			locationHistoric.u_pcnumber_1 = location.u_pcnumber_1;
+			locationHistoric.u_pc_profile = location.u_pc_profile;
+			locationHistoric.phone = location.phone;
+			locationHistoric.phone_territory = location.phone_territory;
+			locationHistoric.u_primary_location = location.u_primary_location;
+			locationHistoric.u_profit_center = location.u_profit_center;
+			locationHistoric.u_profit_center_leader = location.u_profit_center_leader;
+			locationHistoric.u_region = location.u_region;
+			locationHistoric.u_regional_insurance_operations_leader = location.u_regional_insurance_operations_leader;
+			locationHistoric.u_regional_operations_leader_rol = location.u_regional_operations_leader_rol;
+			locationHistoric.u_regional_financial_operations_leader = location.u_regional_financial_operations_leader;
+			locationHistoric.u_senior_financial_operations_leader = location.u_senior_financial_operations_leader;
+			locationHistoric.u_site_code = location.u_site_code;
+			locationHistoric.state = location.state;
+			locationHistoric.stock_room = location.stock_room;
+			locationHistoric.street = location.street;
+			locationHistoric.u_suite = location.u_suite;
+
+			locationHistoric.time_zone = location.time_zone;
+			locationHistoric.u_tr_owner = location.u_tr_owner;
+
+			locationHistoric.zip = location.zip;
+			
+			locationHistoric.current = location.sys_id;
+			
+			locationHistoric.insert();
+			
+			recordCount++;
+		}
+		
+		gs.info("Warehouse Utils - RunLocationBackup - "  + historic_marker + " - Added " + recordCount + " records to History");
+		
+		this.ClearOldLocationBackupRecords();
+	},
+	
+
+	RunProfitCenterBackup: function() {				
+		
+		var recordCount = 0;
+		
+		// Historic Marker - right now it's just a datetime string, but it could take on more use.  This is becasue the Created Date may differ slightly over time.
+		var date = new GlideDateTime();
+		var historic_marker = date.getDisplayValueInternal();
+		
+		gs.info("Warehouse Utils - RunProfitCenterBackup - " + historic_marker + " - Started");
+		
+		var pc = new GlideRecord('u_profit_center');
+		pc.query();		
+		while(pc.next()) {
+			
+			var pcHistoric = new GlideRecord('x_brb_warehouse_profit_center_history');
+			pcHistoric.initialize();
+			
+			pcHistoric.historic_marker = historic_marker;
+			pcHistoric.current = pc.sys_id;
+
+			pcHistoric.u_name = pc.u_name;
+			pcHistoric.u_pcnumber = pc.u_pcnumber;
+			pcHistoric.u_division = pc.u_division;
+			pcHistoric.u_region = pc.u_region;
+			pcHistoric.u_pc_profile = pc.u_pc_profile;
+			pcHistoric.u_active = pc.u_active;
+			
+			pcHistoric.u_profit_center_leader = pc.u_profit_center_leader;
+			pcHistoric.u_accounting_leader = pc.u_accounting_leader;
+			pcHistoric.u_tr_owner = pc.u_tr_owner;
+			pcHistoric.u_insurance_operations_leader = pc.u_insurance_operations_leader;
+			pcHistoric.u_business_owner = pc.u_business_owner;			
+			pcHistoric.u_regional_financial_operations_leader = pc.u_regional_financial_operations_leader;
+			pcHistoric.u_regional_operations_leader_rol = pc.u_regional_operations_leader_rol;
+			pcHistoric.u_regional_insurance_operations_leader = pc.u_regional_insurance_operations_leader;
+			pcHistoric.u_director_of_financial_operations = pc.u_director_of_financial_operations;
+			pcHistoric.u_senior_financial_operations_leader = pc.u_senior_financial_operations_leader;
+			
+			pcHistoric.insert();
+			
+			recordCount++;
+		}
+		
+		gs.info("Warehouse Utils - RunProfitCenterBackup - "  + historic_marker + " - Added " + recordCount + " records to History");
+
+		this.ClearOldProfitCenterBackupRecords();
+	},	
+	
+
+	ClearOldLocationBackupRecords: function() {				
+		gs.info("Warehouse Utils - ClearOldLocationBackupRecords -  Started");
+
+		var date = new GlideDateTime();
+		date.addDaysLocalTime(-2);
+		date.addSeconds(-3 * 60 * 60 );
+		var historic_marker_deleteBefore = date.getDisplayValueInternal();		
+		
+		var history = new GlideRecord('x_brb_warehouse_location_history');
+		history.addQuery('historic_marker','<',historic_marker_deleteBefore);
+		history.query();	
+		while(history.next()) {
+			history.deleteRecord();
+		}
+		
+		gs.info("Warehouse Utils - ClearOldLocationBackupRecords - Completed");
+	},
+	
+	ClearOldProfitCenterBackupRecords: function() {				
+		gs.info("Warehouse Utils - ClearOldProfitCenterBackupRecords -  Started");
+
+		var date = new GlideDateTime();
+		date.addDaysLocalTime(-2);
+		date.addSeconds(-3 * 60 * 60 );
+		var historic_marker_deleteBefore = date.getDisplayValueInternal();		
+		
+		var history = new GlideRecord('x_brb_warehouse_profit_center_history');
+		history.addQuery('historic_marker','<',historic_marker_deleteBefore);
+		history.query();		
+		while(history.next()) {
+			history.deleteRecord();
+		}
+		
+		gs.info("Warehouse Utils - ClearOldProfitCenterBackupRecords - Completed");
+	},
+	
+	GetMidServerName: function() {
+		var instanceName = gs.getProperty('instance_name');
+		
+		var midServerName = "";
+		switch(instanceName){
+			case 'browndev': midServerName = 'W-PHX-SVCNOW02'; break; //case 'browndev': midServerName = 'BigFixMidDev'; break;
+			case 'brownuat': midServerName = 'E-ATL-SVCNOW01'; break;
+			case 'brown': midServerName = 'E-ATL-SVCNOW01'; break;
+			default:  midServerName = 'instance_name_mismatch';
+		}
+
+		return midServerName;
+	},
+	
+	
+	GetMidServerScriptPath: function() {
+		var instanceName = gs.getProperty('instance_name');
+		
+		var midServerPath = "";
+		switch(instanceName){
+			case 'browndev': midServerPath = 'c:\\_scripts'; break;
+			case 'brownuat': midServerPath = 'C:\\_scripts'; break;
+			case 'brown': midServerPath = 'c:\\_scripts'; break;
+			default:  midServerPath = 'instance_name_mismatch';
+		}
+
+		return midServerPath;
+	},
+		
+	
+	SetImportStatus: function(statusCode, statusMessage) {
+		
+		var config = new GlideRecord('x_brb_warehouse_config');
+		config.orderByDesc('sys_created_on');
+		config.setLimit(1);
+		config.query();
+		
+		if(config.next()) {
+			
+			var currentDateTime = new GlideDateTime();
+			
+			config.import_status_code = statusCode;
+			config.import_status_message = statusMessage;
+			
+			if(statusCode == 100) {
+				config.import_started = currentDateTime;
+				config.import_is_running = true;
+			}
+			else if(statusCode == 800) {
+				config.import_completed = currentDateTime;
+				config.import_is_running = false;
+			}
+			else if (statusCode < 0) {
+				config.import_is_running = false;
+			}
+			
+			config.update();
+		}
+		
+	},
+	
+	GetImportStatus: function() {
+		
+		var output = {};
+		
+		var config = new GlideRecord('x_brb_warehouse_config');
+		config.orderByDesc('sys_created_on');
+		config.setLimit(1);
+		config.query();
+		
+		if(config.next()){
+
+			output.code = config.import_status_code + '';
+			output.message = config.import_status_message + '';
+			output.isRunning = config.import_is_running + '';
+			output.started = config.import_started.getDisplayValue();
+			output.completed = config.import_completed.getDisplayValue();
+		}
+		
+		output.midServer = {};
+		output.midServer.name = this.GetMidServerName();
+		
+		var mid = new GlideRecord('ecc_agent');
+		mid.addQuery('name', output.midServer.name);
+		mid.setLimit(1);
+		mid.query();
+		
+		if(mid.next()){
+			output.midServer.status = mid.status + '';
+			output.midServer.lastRefreshed = mid.last_refreshed.getDisplayValue();
+		}
+		
+		return output;
+	},
+	
+	GetImportStatusJSON: function() {
+		var data = this.GetImportStatus();
+		var result = JSON.stringify( data );		
+		return result;
+	},	
+		
+	
+    type: 'WarehouseUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>jquinn@bbins.com</sys_created_by>
+        <sys_created_on>2022-04-07 19:05:22</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>d1c2e25847f2411060917ae2846d43d0</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>WarehouseUtils</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_script_include_d1c2e25847f2411060917ae2846d43d0</sys_update_name>
+        <sys_updated_by>James.Quinn</sys_updated_by>
+        <sys_updated_on>2022-08-05 20:35:33</sys_updated_on>
+    </sys_script_include>
+</record_update>
