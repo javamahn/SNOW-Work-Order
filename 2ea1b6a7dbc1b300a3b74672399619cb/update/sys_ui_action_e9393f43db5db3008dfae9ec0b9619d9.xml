@@ -3,7 +3,9 @@
         <action_name>create_wo_button</action_name>
         <active>true</active>
         <client>false</client>
-        <client_script_v2/>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
         <comments>If a Work Order for this incident Doesn't already exist,  then create WO and set fields</comments>
         <condition>gs.hasRole("x_brb_work_order.user") &amp;&amp; (current.state != 1 &amp;&amp; current.state != 6 &amp;&amp; current.state != 7 &amp;&amp; current.state != 12)</condition>
         <form_action>true</form_action>
@@ -30,7 +32,7 @@
         <order>300</order>
         <script><![CDATA[// Conditional Access control: current incident state is not closed, user has role x_brb_work_order.user
 
-current.update(); // Save any changes made to the incident form first, before proceeding, such as setting topic or other fields
+current.update(); // Save any changes made to the incident form first, before proceeding, such as setting topic or other fields 1
 
 // Check if WO Already Exists
 var wo_check = new GlideRecord("x_brb_work_order_table");
@@ -96,7 +98,7 @@ else { /* Else Work Order Does Not Yet Exists For This Incident */
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e9393f43db5db3008dfae9ec0b9619d9</sys_id>
-        <sys_mod_count>108</sys_mod_count>
+        <sys_mod_count>109</sys_mod_count>
         <sys_name>Create WO</sys_name>
         <sys_overrides/>
         <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
@@ -104,8 +106,8 @@ else { /* Else Work Order Does Not Yet Exists For This Incident */
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
         <sys_update_name>sys_ui_action_e9393f43db5db3008dfae9ec0b9619d9</sys_update_name>
-        <sys_updated_by>greg.brubaker</sys_updated_by>
-        <sys_updated_on>2019-06-06 15:33:22</sys_updated_on>
+        <sys_updated_by>sanderson@bbins.com</sys_updated_by>
+        <sys_updated_on>2023-03-28 16:13:51</sys_updated_on>
         <table>incident</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>
