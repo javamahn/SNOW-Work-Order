@@ -4,6 +4,7 @@
         <angular_module/>
         <formatter>process_flow.xml</formatter>
         <name>Work Order Process Flow</name>
+        <seismic_component/>
         <sys_class_name>sys_ui_formatter</sys_class_name>
         <sys_created_by>stephen.anderson</sys_created_by>
         <sys_created_on>2019-05-13 17:25:13</sys_created_on>

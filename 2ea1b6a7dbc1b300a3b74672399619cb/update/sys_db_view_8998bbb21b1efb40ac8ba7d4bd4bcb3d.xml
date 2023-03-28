@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_db_view">
+    <sys_db_view action="INSERT_OR_UPDATE">
+        <description>join work order tasks to work orders</description>
+        <label>Work Order  and Task</label>
+        <name>x_brb_work_order_workorder_task</name>
+        <plural>Work Order and Tasks</plural>
+        <sys_class_name>sys_db_view</sys_class_name>
+        <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+        <sys_created_on>2019-07-01 18:19:45</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>8998bbb21b1efb40ac8ba7d4bd4bcb3d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_brb_work_order_workorder_task</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_db_view_8998bbb21b1efb40ac8ba7d4bd4bcb3d</sys_update_name>
+        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+        <sys_updated_on>2019-07-01 18:31:06</sys_updated_on>
+    </sys_db_view>
+</record_update>

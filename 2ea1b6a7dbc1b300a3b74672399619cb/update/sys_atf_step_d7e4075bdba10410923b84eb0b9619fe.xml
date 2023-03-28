@@ -9,7 +9,6 @@
         <mugshots_cache_json/>
         <notes/>
         <order>7</order>
-        <snapshot/>
         <step_config display_value="Open an Existing Record">5f2e0e535332120028bc29cac2dc34d3</step_config>
         <sys_class_name>sys_atf_step</sys_class_name>
         <sys_created_by>greg.brubaker</sys_created_by>
@@ -26,7 +25,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:15:59</sys_updated_on>
         <table>x_brb_work_order_table</table>
-        <test display_value="REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
+        <test display_value="WO - REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
         <timeout/>
         <warning_message/>
     </sys_atf_step>
@@ -43,7 +42,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:15:59</sys_updated_on>
         <value>x_brb_work_order_table</value>
-        <variable display_value="">b124164e53a0220002c6435723dc34c5</variable>
+        <variable display_value="Table">b124164e53a0220002c6435723dc34c5</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -57,7 +56,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:14:57</sys_updated_on>
         <value/>
-        <variable display_value="">ad351a4e53a0220002c6435723dc34f0</variable>
+        <variable display_value="Record">ad351a4e53a0220002c6435723dc34f0</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -71,7 +70,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:14:57</sys_updated_on>
         <value/>
-        <variable display_value="">6e55da4e53a0220002c6435723dc34a0</variable>
+        <variable display_value="View">6e55da4e53a0220002c6435723dc34a0</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="id=d7e4075bdba10410923b84eb0b9619fe"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">

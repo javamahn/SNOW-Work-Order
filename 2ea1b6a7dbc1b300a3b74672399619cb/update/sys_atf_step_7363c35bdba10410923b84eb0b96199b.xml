@@ -8,7 +8,6 @@
         <mugshots_cache_json/>
         <notes/>
         <order>3</order>
-        <snapshot/>
         <step_config display_value="Click a UI Action">0f4a128297202200abe4bb7503ac4af0</step_config>
         <sys_class_name>sys_atf_step</sys_class_name>
         <sys_created_by>greg.brubaker</sys_created_by>
@@ -25,7 +24,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:07:42</sys_updated_on>
         <table>x_brb_work_order_table</table>
-        <test display_value="REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
+        <test display_value="WO - REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
         <timeout>1970-01-01 00:00:05</timeout>
         <warning_message/>
     </sys_atf_step>
@@ -42,7 +41,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:07:42</sys_updated_on>
         <value>x_brb_work_order_table</value>
-        <variable display_value="">3eee292353e0220002c6435723dc343c</variable>
+        <variable display_value="Table">3eee292353e0220002c6435723dc343c</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -56,7 +55,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:07:42</sys_updated_on>
         <value>form_submitted_to_server</value>
-        <variable display_value="">7600f16353e0220002c6435723dc34d5</variable>
+        <variable display_value="Assert type">7600f16353e0220002c6435723dc34d5</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -70,6 +69,6 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:07:42</sys_updated_on>
         <value>2dada58cdb2973008dfae9ec0b96197f</value>
-        <variable display_value="">7c5f6d2353e0220002c6435723dc34f6</variable>
+        <variable display_value="UI action">7c5f6d2353e0220002c6435723dc34f6</variable>
     </sys_variable_value>
 </record_update>

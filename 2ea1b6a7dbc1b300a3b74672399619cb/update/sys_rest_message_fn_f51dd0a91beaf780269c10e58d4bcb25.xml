@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn">
+    <sys_rest_message_fn action="INSERT_OR_UPDATE">
+        <authentication_type>inherit_from_parent</authentication_type>
+        <basic_auth_password/>
+        <basic_auth_profile/>
+        <basic_auth_user>greg.brubaker</basic_auth_user>
+        <content>{&#13;
+  "CustomerWorkOrderNo": "INC0216733",&#13;
+  "Incident_Sys_id": "a3e88daa13925b000ae675e36144b040",&#13;
+  "Customer": "Brown and Brown",&#13;
+  "SiteID": "67-1-B&amp;B",&#13;
+  "Address1": "140 Alexandria Blvd.",&#13;
+  "City": "Oviedo",&#13;
+  "State": "Florida",&#13;
+  "Zip": "32765",&#13;
+  "Country": "USA",&#13;
+  "SiteWorkPhone": "6142350717",&#13;
+  "PrimaryContactName": "Goldie Ahuja",&#13;
+  "PrimaryPhoneNumber": "44 207 856 8182",&#13;
+  "WorkCategory": "Maintenance",&#13;
+  "WorkType": "Compute Device",&#13;
+  "WorkRequest": "Repair",&#13;
+  "ProblemDescription": "Unable to Check Out",&#13;
+  "Manufacturer": "Hilton",&#13;
+  "Model": "HOTEL HP Color LaserJet CP4025n Printer",&#13;
+  "SerialNumber": "CN66HDDNNZ",&#13;
+  "AssetLocation": "Frontdesk",&#13;
+  "SLA": "7x24x4",&#13;
+  "Attachments": null&#13;
+}</content>
+        <function_name>Create Work Order - TEST</function_name>
+        <http_method>post</http_method>
+        <lock>false</lock>
+        <oauth2_profile/>
+        <protocol_name/>
+        <qualified_name>Insight - Field Power [ Create Work Order - TEST ]</qualified_name>
+        <rest_endpoint>https://Testinsight.fieldpower.com/FPInsight/api/Integration/CreateWorkOrder</rest_endpoint>
+        <rest_message display_value="Insight - Field Power">ebc9fae4dbbdf340a3b74672399619f2</rest_message>
+        <sys_class_name>sys_rest_message_fn</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-07-09 15:24:21</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>f51dd0a91beaf780269c10e58d4bcb25</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Create Work Order - TEST</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_rest_message_fn_f51dd0a91beaf780269c10e58d4bcb25</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-07-09 15:24:21</sys_updated_on>
+        <use_basic_auth>false</use_basic_auth>
+        <use_mid_server/>
+        <use_mutual_auth>false</use_mutual_auth>
+    </sys_rest_message_fn>
+</record_update>

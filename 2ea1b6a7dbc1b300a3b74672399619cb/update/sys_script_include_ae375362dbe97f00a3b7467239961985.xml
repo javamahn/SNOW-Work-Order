@@ -3,6 +3,7 @@
         <access>package_private</access>
         <active>true</active>
         <api_name>x_brb_work_order.WorkOrderRestUtils</api_name>
+        <caller_access/>
         <client_callable>false</client_callable>
         <description/>
         <name>WorkOrderRestUtils</name>
@@ -27,15 +28,26 @@ WorkOrderRestUtils.prototype = {
 					if(typeof workOrder.correlation_id == 'undefined' || workOrder.correlation_id == '') {
 						// Send REST calls to Insight
 						
-						// 1. GetToke
-						var request = new sn_ws.RESTMessageV2('Insight - Field Power','Get Token');  //Configure and get values
+						// 1. GetToken
+						var request = null; 
 						if(this.isTestEnvironment()) {
-							request.setEndpoint("https://testinsight.fieldpower.com/insightIdentity/connect/token");
+							gs.info('WorkOrderRestUtils - sendDispatch - isTestEnvironment: true');
+							request = new sn_ws.RESTMessageV2('Insight - Field Power','Get Token - TEST');  // test
+						}
+						else {
+							request = new sn_ws.RESTMessageV2('Insight - Field Power','Get Token');  // production
 						}
 						
 						var response = request.execute();
 						var json = response.getBody();
 						var token = JSON.parse(json);
+						
+						gs.info('WorkOrderRestUtils - sendDispatch - Get Token - reponse: \n' + json);
+						if(token.error){
+							gs.error('WorkOrderRestUtils - sendDispatch - REST Token Error: ' + token.error + ' - ' + token.error_description);
+							gs.addErrorMessage('REST Token Error: ' + token.error + ' - ' + token.error_description);
+                            workOrder.work_notes = 'WorkOrderRestUtils - sendDispatch - REST Token Error: ' + token.error + ' - ' + token.error_description;
+						}
 						
 						// 2. CreateWorkOrder						
 						var data = {};
@@ -80,10 +92,14 @@ WorkOrderRestUtils.prototype = {
 						
 						var requestBody = JSON.stringify(data, null, "\t");
 						
-						request = new sn_ws.RESTMessageV2('Insight - Field Power','Create Work Order');  //Configure and get values
+						gs.info('WorkOrderRestUtils - sendDispatch - requestBody: \n' + requestBody);
+						
 						if(this.isTestEnvironment()) {
-							request.setEndpoint("https://Testinsight.fieldpower.com/FPInsight/api/Integration/CreateWorkOrder");
-						}					
+							request = new sn_ws.RESTMessageV2('Insight - Field Power','Create Work Order - TEST');  // test
+						}
+						else {
+							request = new sn_ws.RESTMessageV2('Insight - Field Power','Create Work Order');  // production
+						}	 			
 						request.setStringParameter('token', token.access_token);
 						request.setRequestBody(requestBody);
 						response = request.execute();
@@ -121,11 +137,16 @@ WorkOrderRestUtils.prototype = {
 			catch(error){
 				success = false;
 				try {
+					
+					var errorStr = "WorkOrderRestUtils - sendDispatch - Error: " + error.message + " (line number: " + error.lineNumber + " )" + " [source name: " + error.sourceName + " ]";
+					gs.error(errorStr);
+					
 					workOrder.work_notes = 'Failed - REST Error: ' + error.message;
 					workOrder.update();
 				}
 				catch(error2) {
-					
+					errorStr = "WorkOrderRestUtils - sendDispatch - Error (2): " + error2.message + " (line number: " + error2.lineNumber + " )" + " [source name: " + error2.sourceName + " ]";
+					gs.error(errorStr);
 				}
 			}
 		}
@@ -220,14 +241,14 @@ WorkOrderRestUtils.prototype = {
         <sys_created_on>2019-05-24 14:31:33</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>ae375362dbe97f00a3b7467239961985</sys_id>
-        <sys_mod_count>67</sys_mod_count>
+        <sys_mod_count>80</sys_mod_count>
         <sys_name>WorkOrderRestUtils</sys_name>
         <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
         <sys_policy>read</sys_policy>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
         <sys_update_name>sys_script_include_ae375362dbe97f00a3b7467239961985</sys_update_name>
-        <sys_updated_by>greg.brubaker</sys_updated_by>
-        <sys_updated_on>2019-06-26 15:21:06</sys_updated_on>
+        <sys_updated_by>jquinn@bbins.com</sys_updated_by>
+        <sys_updated_on>2021-10-04 15:42:41</sys_updated_on>
     </sys_script_include>
 </record_update>

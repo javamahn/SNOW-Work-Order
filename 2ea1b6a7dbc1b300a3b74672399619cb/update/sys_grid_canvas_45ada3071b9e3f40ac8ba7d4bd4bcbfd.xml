@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_grid_canvas">
+    <sys_grid_canvas action="INSERT_OR_UPDATE">
+        <legacy_page display_value="PA All Work Orders">c1ada3071b9e3f40ac8ba7d4bd4bcbfc</legacy_page>
+        <name>PA New Tab 4</name>
+        <sys_class_name>sys_grid_canvas</sys_class_name>
+        <sys_created_by>rcurrie@bbinslv.com</sys_created_by>
+        <sys_created_on>2019-07-02 12:08:37</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>45ada3071b9e3f40ac8ba7d4bd4bcbfd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>PA New Tab 4</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_grid_canvas_45ada3071b9e3f40ac8ba7d4bd4bcbfd</sys_update_name>
+        <sys_updated_by>rcurrie@bbinslv.com</sys_updated_by>
+        <sys_updated_on>2019-07-02 12:08:37</sys_updated_on>
+    </sys_grid_canvas>
+</record_update>

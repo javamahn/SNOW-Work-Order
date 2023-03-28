@@ -12,7 +12,6 @@
             <sys_created_by>greg.brubaker</sys_created_by>
             <sys_created_on>2019-06-04 21:48:31</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>f2d5e11adb7137008dfae9ec0b961919</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>State</sys_name>
             <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn">
     <sys_rest_message_fn action="INSERT_OR_UPDATE">
-        <authentication_type>inherit_from_parent</authentication_type>
+        <authentication_type>no_authentication</authentication_type>
         <basic_auth_password/>
-        <basic_auth_profile/>
+        <basic_auth_profile display_value="Insight Work Order">bffb6b451ba2b780269c10e58d4bcb69</basic_auth_profile>
         <basic_auth_user>greg.brubaker</basic_auth_user>
-        <content>client_id=roclient&amp;client_secret=secret&amp;grant_type=password&amp;username=Api_BB@insight.test&amp;password=Test@1234&amp;scope=dataEventRecords%20offline_access</content>
+        <content>client_id=roclient&amp;client_secret=secret&amp;grant_type=password&amp;username=Api_BB@insight.com &amp;password=FPapi052019&amp;scope=dataEventRecords%20offline_access</content>
         <function_name>Get Token</function_name>
         <http_method>post</http_method>
         <lock>false</lock>
         <oauth2_profile/>
         <protocol_name/>
         <qualified_name>Insight - Field Power [ Get Token ]</qualified_name>
-        <rest_endpoint>https://testinsight.fieldpower.com/insightIdentity/connect/token</rest_endpoint>
+        <rest_endpoint>https://insight.fieldpower.com/FPIdentity/connect/token</rest_endpoint>
         <rest_message display_value="Insight - Field Power">ebc9fae4dbbdf340a3b74672399619f2</rest_message>
         <sys_class_name>sys_rest_message_fn</sys_class_name>
         <sys_created_by>greg.brubaker</sys_created_by>
         <sys_created_on>2019-05-30 17:26:01</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>38d9bee4dbbdf340a3b74672399619f5</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>Get Token</sys_name>
         <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
         <sys_update_name>sys_rest_message_fn_38d9bee4dbbdf340a3b74672399619f5</sys_update_name>
-        <sys_updated_by>greg.brubaker</sys_updated_by>
-        <sys_updated_on>2019-06-26 17:14:03</sys_updated_on>
+        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+        <sys_updated_on>2019-07-08 17:49:22</sys_updated_on>
         <use_basic_auth>false</use_basic_auth>
         <use_mid_server/>
         <use_mutual_auth>false</use_mutual_auth>

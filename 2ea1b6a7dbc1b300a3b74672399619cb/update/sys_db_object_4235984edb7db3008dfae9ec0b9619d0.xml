@@ -3,12 +3,12 @@
         <access/>
         <actions_access>false</actions_access>
         <alter_access>false</alter_access>
+        <caller_access/>
         <client_scripts_access>false</client_scripts_access>
         <configuration_access>false</configuration_access>
         <create_access>false</create_access>
         <create_access_controls>false</create_access_controls>
         <delete_access>false</delete_access>
-        <extension_model/>
         <is_extendable>false</is_extendable>
         <label>Work Order Task Integration</label>
         <live_feed_enabled>false</live_feed_enabled>
@@ -16,10 +16,9 @@
         <number_ref/>
         <provider_class/>
         <read_access>true</read_access>
+        <scriptable_table>false</scriptable_table>
         <super_class display_value="Import Set Row" name="sys_import_set_row">2c484d1113101200caa3da82e144b02a</super_class>
-        <sys_class_code/>
         <sys_class_name>sys_db_object</sys_class_name>
-        <sys_class_path/>
         <sys_created_by>greg.brubaker</sys_created_by>
         <sys_created_on>2019-06-03 21:17:45</sys_created_on>
         <sys_customer_update>false</sys_customer_update>

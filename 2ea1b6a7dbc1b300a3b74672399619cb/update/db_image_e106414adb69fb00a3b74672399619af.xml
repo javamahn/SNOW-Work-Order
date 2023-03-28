@@ -29,18 +29,20 @@
         <chunk_size_bytes>734003</chunk_size_bytes>
         <compressed>true</compressed>
         <content_type>image/png</content_type>
+        <encryption_context/>
         <file_name>image</file_name>
+        <hash/>
         <image_height>260</image_height>
         <image_width>602</image_width>
         <size_bytes>24925</size_bytes>
         <size_compressed>24030</size_compressed>
-        <state/>
+        <state>available</state>
         <sys_created_by>greg.brubaker</sys_created_by>
         <sys_created_on>2019-05-22 14:55:47</sys_created_on>
         <sys_id>4aba850adb69fb00a3b746723996196f</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_updated_by>greg.brubaker</sys_updated_by>
-        <sys_updated_on>2019-05-22 14:55:47</sys_updated_on>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>guest</sys_updated_by>
+        <sys_updated_on>2020-02-10 19:55:35</sys_updated_on>
         <table_name>ZZ_YYdb_image</table_name>
         <table_sys_id>e106414adb69fb00a3b74672399619af</table_sys_id>
     </sys_attachment>

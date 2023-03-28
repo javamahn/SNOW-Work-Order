@@ -167,7 +167,7 @@
             <sys_domain_path>/</sys_domain_path>
             <sys_id>c87d93c3dbd9b3008dfae9ec0b961924</sys_id>
             <sys_mod_count>4</sys_mod_count>
-            <sys_name>Work Site &amp; Details</sys_name>
+            <sys_name>x_brb_work_order_table</sys_name>
             <sys_overrides/>
             <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
             <sys_policy/>

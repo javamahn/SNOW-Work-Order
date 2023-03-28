@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_process_flow">
     <sys_process_flow action="INSERT_OR_UPDATE">
         <active>true</active>
-        <condition table="x_brb_work_order_table">state=0^EQ<item endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="0"/>
+        <condition table="x_brb_work_order_table">state=0^EQ<item display_value="Review" endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="0"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </condition>
         <description><![CDATA[<p>Work Order has been reviewed</p>]]></description>

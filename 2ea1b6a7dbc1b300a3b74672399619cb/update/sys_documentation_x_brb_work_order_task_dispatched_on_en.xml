@@ -12,7 +12,6 @@
             <sys_created_by>greg.brubaker</sys_created_by>
             <sys_created_on>2019-05-21 19:06:45</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>649a78bddbe9bb00a3b7467239961969</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>Dispatched On</sys_name>
             <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>

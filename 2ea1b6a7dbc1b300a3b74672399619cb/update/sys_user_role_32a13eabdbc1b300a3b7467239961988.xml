@@ -3,6 +3,7 @@
         <assignable_by/>
         <description/>
         <elevated_privilege>false</elevated_privilege>
+        <encryption_context/>
         <grantable>true</grantable>
         <includes_roles/>
         <name>x_brb_work_order.user</name>

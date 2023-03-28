@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_process_flow">
     <sys_process_flow action="INSERT_OR_UPDATE">
         <active>true</active>
-        <condition table="x_brb_work_order_table">state=9^ORstate=4^EQ<item endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="9"/>
-            <item endquery="false" field="state" goto="false" newquery="false" operator="=" or="true" value="4"/>
+        <condition table="x_brb_work_order_table">state=9^ORstate=4^EQ<item display_value="Closed Incomplete" endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="9"/>
+            <item display_value="Closed Complete" endquery="false" field="state" goto="false" newquery="false" operator="=" or="true" value="4"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </condition>
         <description><![CDATA[<p>Work Order has been processed and completed or closed incomplete</p>]]></description>

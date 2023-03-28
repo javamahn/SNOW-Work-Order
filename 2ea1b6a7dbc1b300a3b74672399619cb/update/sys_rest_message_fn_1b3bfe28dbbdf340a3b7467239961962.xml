@@ -5,51 +5,51 @@
         <basic_auth_profile/>
         <basic_auth_user>greg.brubaker</basic_auth_user>
         <content>{&#13;
-  "CustomerWorkOrderNo": "INC0216733",&#13;
-  "Incident_Sys_id": "a3e88daa13925b000ae675e36144b040",&#13;
-  "Customer": "Brown and Brown",&#13;
-  "SiteID": "67-1-B&amp;B",&#13;
-  "Address1": "140 Alexandria Blvd.",&#13;
-  "City": "Oviedo",&#13;
-  "State": "Florida",&#13;
-  "Zip": "32765",&#13;
-  "Country": "USA",&#13;
-  "SiteWorkPhone": "6142350717",&#13;
-  "PrimaryContactName": "Goldie Ahuja",&#13;
-  "PrimaryPhoneNumber": "44 207 856 8182",&#13;
-  "WorkCategory": "Maintenance",&#13;
-  "WorkType": "Compute Device",&#13;
-  "WorkRequest": "Repair",&#13;
-  "ProblemDescription": "Unable to Check Out",&#13;
-  "Manufacturer": "Hilton",&#13;
-  "Model": "HOTEL HP Color LaserJet CP4025n Printer",&#13;
-  "SerialNumber": "CN66HDDNNZ",&#13;
-  "AssetLocation": "Frontdesk",&#13;
-  "SLA": "7x24x4",&#13;
-  "Attachments": null&#13;
-}</content>
+"CustomerWorkOrderNo": "TESTWOR1234",&#13;
+"Incident_Sys_id": "de1a97811b22b780269c10e58d4bcb3e",&#13;
+"Customer": "Brown and Brown",&#13;
+"SiteID": "583-10",&#13;
+"Address1": "3697 Mt. Diablo Blvd. ",&#13;
+"City": "Lafayette",&#13;
+"State": "California",&#13;
+"Zip": "94549",&#13;
+"Country": "USA",&#13;
+"SiteWorkPhone": "503-219-3252",&#13;
+"PrimaryContactName": "Kristan Denae Leigon Hinckley",&#13;
+"PrimaryPhoneNumber": "510-903-0287",&#13;
+"WorkCategory": "On-Site Support",&#13;
+"WorkType": "B&amp;B-Custom Project",&#13;
+"WorkRequest": "Project",&#13;
+"ProblemDescription": "Contractor Field Services Position in 583-Oakland - Need to place temp field services tech at the Oakland (Lafayette, CA) office until a permanent placement can be found. ",&#13;
+"Manufacturer": null,&#13;
+"Model": null,&#13;
+"SerialNumber": null,&#13;
+"AssetLocation": null,&#13;
+"SLA": null,&#13;
+"Attachments": null&#13;
+} </content>
         <function_name>Create Work Order</function_name>
         <http_method>post</http_method>
         <lock>false</lock>
         <oauth2_profile/>
         <protocol_name/>
         <qualified_name>Insight - Field Power [ Create Work Order ]</qualified_name>
-        <rest_endpoint>https://Testinsight.fieldpower.com/FPInsight/api/Integration/CreateWorkOrder</rest_endpoint>
+        <rest_endpoint>https://insight.fieldpower.com/FPInsight/api/Integration/CreateWorkOrder</rest_endpoint>
         <rest_message display_value="Insight - Field Power">ebc9fae4dbbdf340a3b74672399619f2</rest_message>
         <sys_class_name>sys_rest_message_fn</sys_class_name>
         <sys_created_by>greg.brubaker</sys_created_by>
         <sys_created_on>2019-05-30 17:34:05</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>1b3bfe28dbbdf340a3b7467239961962</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>11</sys_mod_count>
         <sys_name>Create Work Order</sys_name>
         <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
         <sys_update_name>sys_rest_message_fn_1b3bfe28dbbdf340a3b7467239961962</sys_update_name>
-        <sys_updated_by>greg.brubaker</sys_updated_by>
-        <sys_updated_on>2019-06-26 14:55:59</sys_updated_on>
+        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+        <sys_updated_on>2019-07-08 19:11:23</sys_updated_on>
         <use_basic_auth>false</use_basic_auth>
         <use_mid_server/>
         <use_mutual_auth>false</use_mutual_auth>

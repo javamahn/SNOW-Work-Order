@@ -9,7 +9,6 @@
         <mugshots_cache_json/>
         <notes/>
         <order>9</order>
-        <snapshot/>
         <step_config display_value="Assert JSON Response Payload Element">afc114199f132200ef4afa7dc67fcf64</step_config>
         <sys_class_name>sys_atf_step</sys_class_name>
         <sys_created_by>greg.brubaker</sys_created_by>
@@ -26,7 +25,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:23:32</sys_updated_on>
         <table/>
-        <test display_value="REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
+        <test display_value="WO - REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
         <timeout/>
         <warning_message/>
     </sys_atf_step>
@@ -43,7 +42,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:23:32</sys_updated_on>
         <value>Success</value>
-        <variable display_value="">7b139c199f132200ef4afa7dc67fcfb3</variable>
+        <variable display_value="Value">7b139c199f132200ef4afa7dc67fcfb3</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -57,7 +56,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:23:32</sys_updated_on>
         <value>message</value>
-        <variable display_value="">5a9258199f132200ef4afa7dc67fcfb4</variable>
+        <variable display_value="Element path">5a9258199f132200ef4afa7dc67fcfb4</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -71,7 +70,7 @@
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:23:32</sys_updated_on>
         <value>equals</value>
-        <variable display_value="">2db298199f132200ef4afa7dc67fcfbc</variable>
+        <variable display_value="Operation">2db298199f132200ef4afa7dc67fcfbc</variable>
     </sys_variable_value>
     <sys_element_mapping action="delete_multiple" query="id=3b278b5fdba10410923b84eb0b9619e1"/>
     <sys_element_mapping action="INSERT_OR_UPDATE">

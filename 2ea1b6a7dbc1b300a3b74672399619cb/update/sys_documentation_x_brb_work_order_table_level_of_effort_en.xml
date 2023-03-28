@@ -12,7 +12,6 @@
             <sys_created_by>greg.brubaker</sys_created_by>
             <sys_created_on>2019-05-13 15:40:34</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>46ae7207db59b3008dfae9ec0b96191b</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>Level Of Effort</sys_name>
             <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>

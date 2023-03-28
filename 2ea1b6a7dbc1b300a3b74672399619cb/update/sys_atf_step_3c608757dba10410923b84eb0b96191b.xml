@@ -30,7 +30,6 @@ Confirm the record was successfully inserted</description>
         <mugshots_cache_json/>
         <notes/>
         <order>1</order>
-        <snapshot/>
         <step_config display_value="Record Insert">14872288df60220062fe6c7a4df26319</step_config>
         <sys_class_name>sys_atf_step</sys_class_name>
         <sys_created_by>greg.brubaker</sys_created_by>
@@ -47,7 +46,7 @@ Confirm the record was successfully inserted</description>
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
         <table>x_brb_work_order_table</table>
-        <test display_value="REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
+        <test display_value="WO - REST: WO Inbound">faeffa17dba10410923b84eb0b961960</test>
         <timeout/>
         <warning_message/>
     </sys_atf_step>
@@ -65,7 +64,7 @@ Confirm the record was successfully inserted</description>
         <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
         <value>assignment_group=0b6c00c3dbb53300923b84eb0b9619f4^state=-5^priority=3^work_type=1^request_type=1^expected_start=12-11-2019 12:00:00 AM^opened_by=72a5e7ba1b4db3403ed30dc2cd4bcb31^technical_contact_phone=(407) 697-3246^short_description=ATF - Testing^description=Testing ATF REST functionality - TEST RECORD^location=b2c80fb113b4f20084a3f6e2e144b09a^u_string_1=220 S. Ridgewood Ave.&#13;
 Daytona Beach, FL 32114^local_contact=72a5e7ba1b4db3403ed30dc2cd4bcb31^local_contact_phone=407-697-3246^delivery_address_same_as_billable=1^delivery_address_street=220 S. Ridgewood Ave.^delivery_address_suite=^delivery_address_city=Daytona Beach^delivery_address_state_province=FL^delivery_address_zip_postal_code=32114^EQ</value>
-        <variable display_value="">dd54cf535320220002c6435723dc34fd</variable>
+        <variable display_value="Field values">dd54cf535320220002c6435723dc34fd</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -79,7 +78,7 @@ Daytona Beach, FL 32114^local_contact=72a5e7ba1b4db3403ed30dc2cd4bcb31^local_con
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
         <value>x_brb_work_order_table</value>
-        <variable display_value="">90144b535320220002c6435723dc3488</variable>
+        <variable display_value="Table">90144b535320220002c6435723dc3488</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -93,7 +92,7 @@ Daytona Beach, FL 32114^local_contact=72a5e7ba1b4db3403ed30dc2cd4bcb31^local_con
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
         <value>1</value>
-        <variable display_value="">e6e3c7535320220002c6435723dc3496</variable>
+        <variable display_value="Enforce security">e6e3c7535320220002c6435723dc3496</variable>
     </sys_variable_value>
     <sys_variable_value action="INSERT_OR_UPDATE">
         <document>sys_atf_step</document>
@@ -107,6 +106,7 @@ Daytona Beach, FL 32114^local_contact=72a5e7ba1b4db3403ed30dc2cd4bcb31^local_con
         <sys_updated_by>greg.brubaker</sys_updated_by>
         <sys_updated_on>2019-12-11 17:05:14</sys_updated_on>
         <value>record_successfully_inserted</value>
-        <variable display_value="">9024a37f671003007ba405225685efe5</variable>
+        <variable display_value="Assert type">9024a37f671003007ba405225685efe5</variable>
     </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_atf_input_variable_14872288df60220062fe6c7a4df26319^id=3c608757dba10410923b84eb0b96191b"/>
 </record_update>
