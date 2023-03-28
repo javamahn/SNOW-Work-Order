@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>POST</http_method>
+        <name>Update</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+    var headers = {};
+	headers['Content-Type'] = 'application/json';
+    response.setHeaders(headers);
+
+	var data = request.body.data;
+	var result = {};
+	result.request = data;
+	
+	//if(typeof data.WorkOrderNumber == 'undefined' || data.WorkOrderNumber == '')
+	if(typeof data.SysId == 'undefined' || data.SysId == '')
+	{	
+		result.message = "Error";
+		result.longMessage = "SysId Not Specified";	
+		response.setStatus(400); // Bad Request
+	}
+	else {
+		var task = new GlideRecord('x_brb_work_order_task');
+		var workOrder = new GlideRecord('x_brb_work_order_table');
+		//workOrder.addQuery('number', data.WorkOrderNumber);
+		workOrder.addQuery('sys_id', data.SysId);
+		workOrder.query();
+					
+		if(workOrder.next()) { // If we found a Work Order, then lookup the Work Order Task
+			task.addQuery('parent', workOrder.sys_id);
+			task.addQuery('work_order_task_type', 'Dispatch');
+		}
+		else { // We didn't find a Work Order, so the passed Sys Id is expected to be for the Work Order Task Already
+			task.addQuery('sys_id', data.SysId);
+		}
+
+		task.query();
+		if(task.next()) {
+			
+			var importSet = new GlideRecord('x_brb_work_order_task_import_set');
+			importSet.initialize();
+
+			importSet.u_sys_id = task.sys_id;
+			
+			var longMessage = "";
+			var fields = "";
+			var duplicateNote = false;
+			
+			if(typeof data.ExpectedStartDate != 'undefined' && data.ExpectedStartDate != null && data.ExpectedStartDate != '')
+			{
+				importSet.u_expected_start = data.ExpectedStartDate; // This is the Import Set field u_expected_start
+				fields += "ExpectedStartDate, ";
+			}
+			
+			if(typeof data.ExpectedEndDate != 'undefined' && data.ExpectedEndDate != null && data.ExpectedEndDate != '')
+			{
+				importSet.u_expected_end = data.ExpectedEndDate;			
+				fields += "ExpectedEndDate, ";
+			}			
+			
+			if(typeof data.DispatchedOnDate != 'undefined' && data.DispatchedOnDate != null && data.DispatchedOnDate != '')
+			{
+				importSet.u_dispatched_on = data.DispatchedOnDate;				
+				fields += "DispatchedOnDate, ";
+			}
+			
+			if(typeof data.ActualWorkStartDate != 'undefined' && data.ActualWorkStartDate != null && data.ActualWorkStartDate != '')
+			{
+				importSet.u_work_start = data.ActualWorkStartDate;			
+				fields += "ActualWorkStartDate, ";
+				if(task.state == 1) { /* If Current Task State: Open */
+					importSet.u_state = 2; /* Work In Progress */
+				}
+			}
+			
+			if(typeof data.ActualWorkEndDate != 'undefined' && data.ActualWorkEndDate != null && data.ActualWorkEndDate != '')
+			{
+				importSet.u_work_end = data.ActualWorkEndDate;
+				importSet.u_state = 3; /* Closed */											
+				fields += "ActualWorkEndDate, ";
+			}
+			
+			if(typeof data.Note != 'undefined' && data.Note != null && data.Note != '')
+			{
+				// Make sure note is not a duplicate of prior notes
+				var noteString = task.work_notes.getJournalEntry(-1);
+				var notes = noteString.split("\n\n");
+				
+				for (var i = 0; i < notes.length; i++) {
+					var noteParts = notes[i].split("\n");
+					if(noteParts[1] == data.Note) {
+						duplicateNote = true;
+						break;
+					}
+				}
+
+				fields += "Note, ";	
+				
+				if(!duplicateNote) {
+					importSet.u_work_notes = data.Note;				
+				}
+			}
+			
+			// Remove Trailing ", " from Field List
+			if(fields.length > 2) {
+				fields = fields.substring(0, fields.length - 2 );
+			}
+
+			if(fields == '')
+			{
+				result.message = "Error";
+				result.longMessage = "Only SysId Specified";
+				response.setStatus(400); // Bad Request
+			}
+			else {
+				
+				// Insert Import Set and Get Result
+				var resultSysId = importSet.insert();
+				var importSetRow = new GlideRecord('x_brb_work_order_task_import_set');
+				importSetRow.get(resultSysId);
+				
+				var status = importSetRow.sys_import_state;
+				
+				if(status == 'ignored' || status == 'ignore'){
+					longMessage = 'Accepted and Processed.  Data Provided matched local data set, update was ignored.';
+					result.message = "Success";	
+					response.setStatus(200); // Ok				
+				}
+				else if (status == 'updated') {
+					longMessage = 'Accepted and Processed.  Data Updated. (Found Fields: ' + fields + ').';
+					
+					if(duplicateNote) {
+						longMessage += "  Note skipped - duplicate of prior.";
+					}
+					
+					result.message = "Success";
+					response.setStatus(200); // Ok				
+				}
+				else if (status == 'inserted') {
+					longMessage = 'Inserted. (Found Fields: ' + fields + ')';
+					result.message = "Success";	
+					response.setStatus(200); // Ok
+				}
+				else {
+					longMessage = 'Unexpected Import Result during transform, ' 
+								  + ' state: ' + importSetRow.sys_import_state.toString() + ' ' 
+								  + ' error_message: ' + importSetRow.sys_row_error.error_message.toString() + ' '
+								  + ' error_code: ' + importSetRow.sys_row_error.error_code.toString();
+					result.message = "Error";
+					response.setStatus(400); // Bad Request
+				}
+				
+				result.longMessage = longMessage;
+			}
+
+			//Acquire an updated task after the import set changed it, just to make sure we don't mess things up...
+			task.get(task.sys_id);
+			task.work_notes = 'Inbound REST Update \r\n\r\n' 
+				+ JSON.stringify(result, null,"\t");			
+			task.update();
+		}
+		else {
+			result.message = "Error";
+			result.longMessage = "SysId Not Found";	
+			response.setStatus(400); // Bad Request
+		}
+			
+	}
+
+	var writer = response.getStreamWriter();
+	var json = JSON.stringify(result, null, "  ");	
+	writer.writeString(json);
+	
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_brb_work_order/work_order</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example>{  &#13;
+   "SysId":"eb29345edbbdf3008dfae9ec0b9619b3",&#13;
+   "ExpectedStartDate":"2019-06-09 12:23:03",&#13;
+   "ExpectedEndDate":"2019-06-09 16:23:03",&#13;
+   "DispatchedOnDate":"2019-06-09 13:23:04",&#13;
+   "ActualWorkStartDate":"2019-06-09 14:23:05",&#13;
+   "ActualWorkEndDate":"2019-06-09 15:23:06",&#13;
+   "Note":"Test Note 123"&#13;
+}</request_example>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description>Update Work Order Task with Values</short_description>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-05-31 19:06:48</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>eb3a908ddbb1f3408dfae9ec0b9619d7</sys_id>
+        <sys_mod_count>60</sys_mod_count>
+        <sys_name>Update</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_ws_operation_eb3a908ddbb1f3408dfae9ec0b9619d7</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-06-05 17:44:24</sys_updated_on>
+        <web_service_definition display_value="Work Order">6c69944ddbb1f3408dfae9ec0b961959</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

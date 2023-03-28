@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_brb_work_order.WorkOrderUtils</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>WorkOrderUtils</name>
+        <script><![CDATA[var WorkOrderUtils = Class.create();
+WorkOrderUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	getExpectedStart : function() {
+		//Get a schedule by sys_id to calculate duration
+		var sched = GlideSchedule('7b07fb20135b36008cc1f4b2e144b0c3');
+		
+		//Get the current date/time in correct format for duration calculation 1
+		var currentDateTime = new GlideDateTime();
+
+		//Set the amount of time to add (in seconds)
+		var timeToAdd = 172800; //2 Days
+		durToAdd = new GlideDuration(timeToAdd*1000);
+		var newDateTime = sched.add(currentDateTime, durToAdd, '');
+
+		//return newDateTime.getValue();	
+		
+		return newDateTime.getDisplayValue();
+	},
+	
+	getUserInfo : function() {
+		
+		// Get User Phone
+		var userInfo = {};
+		
+		var user = new GlideRecord('sys_user');
+		var sys_id = this.getParameter('sysparm_sys_id');
+		user.addQuery('sys_id', sys_id);
+		user.query();
+		
+		if(user.next()) {
+			if(typeof user.phone != 'undefined'){ userInfo.phone = user.phone + ''; } else{ userInfo.phone = '';}
+		}
+		
+		var result = JSON.stringify( userInfo );
+		return result;	
+	},
+	
+	getLocationText : function() {
+		
+		// Get Location Address Text
+		var locationInfo = {};
+		locationInfo.profitCenter = {};
+		
+		var locationText = '';
+		
+		var loc = new GlideRecord('cmn_location');
+		var sys_id = this.getParameter('sysparm_sys_id');
+		loc.addQuery('sys_id', sys_id);
+		loc.query();
+		
+		if(loc.next()) {
+			if(typeof loc.street != 'undefined'){ locationText += loc.street + '\r\n'; }
+			if(typeof loc.suite != 'undefined' && loc.suite.trim() != ''){ locationText += loc.suite + '\r\n'; }
+			if(typeof loc.city != 'undefined'){ locationText += loc.city + ', ' + loc.state + ' ' + loc.zip; }
+						
+			if(typeof loc.street != 'undefined'){ locationInfo.street = loc.street + ''; } else{ locationInfo.street = '';}
+			if(typeof loc.suite  != 'undefined'){ locationInfo.suite  = loc.suite  + ''; } else{ locationInfo.suite = ''; }
+			if(typeof loc.city   != 'undefined'){ locationInfo.city   = loc.city   + ''; } else{ locationInfo.city = '';  }
+			if(typeof loc.state  != 'undefined'){ locationInfo.state  = loc.state  + ''; } else{ locationInfo.state = ''; }
+			if(typeof loc.zip    != 'undefined'){ locationInfo.zip    = loc.zip    + ''; } else{ locationInfo.zip = '';   }
+			
+			//locationInfo.localItContact = loc.u_it_contact + '';
+			
+			var pc = new GlideRecord('u_profit_centers_core');
+			pc.addQuery('sys_id', loc.u_pc_profile);
+			pc.query();
+			if(pc.next()) {
+				if(typeof pc.u_accounting_leader != 'undefined'){ locationInfo.profitCenter.accountingLeader = pc.u_accounting_leader + ''; } else{ locationInfo.profitCenter.accountingLeader = '';   }
+			}
+			else {
+				locationInfo.profitCenter.accountingLeader = '';
+			}
+		}
+					
+		locationInfo.locationText = locationText.replace(/\r\n\r\n/g, '\r\n');
+		
+		var result = JSON.stringify( locationInfo );
+		
+		return result;
+					
+	},
+			
+	type: 'WorkOrderUtils'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-05-13 19:53:34</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>b695f38fdb1db3008dfae9ec0b96190e</sys_id>
+        <sys_mod_count>48</sys_mod_count>
+        <sys_name>WorkOrderUtils</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_script_include_b695f38fdb1db3008dfae9ec0b96190e</sys_update_name>
+        <sys_updated_by>sanderson@bbins.com</sys_updated_by>
+        <sys_updated_on>2023-03-28 16:13:19</sys_updated_on>
+    </sys_script_include>
+</record_update>

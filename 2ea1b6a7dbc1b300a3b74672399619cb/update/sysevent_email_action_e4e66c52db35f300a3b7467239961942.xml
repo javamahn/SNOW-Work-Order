@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_email_action">
+    <sysevent_email_action action="INSERT_OR_UPDATE">
+        <action_insert>false</action_insert>
+        <action_update>true</action_update>
+        <active>true</active>
+        <advanced_condition><![CDATA[if (current.expected_start.changes() && current.expected_start != null && current.work_order_task_type == "Dispatch" && current.expected_start != current.sys_created_on) {
+//gs.log("Work Order Task expected start change", "Work Order Task Notification");
+      answer = true;
+
+} else {
+
+      answer = false;
+
+}]]></advanced_condition>
+        <affected_field_on_event/>
+        <category display_value="Work Order" name="Work Order">093fa116dbb137008dfae9ec0b9619c6</category>
+        <collection>x_brb_work_order_task</collection>
+        <condition/>
+        <content_type>text/html</content_type>
+        <default_interval/>
+        <description/>
+        <digest_from/>
+        <digest_html/>
+        <digest_reply_to/>
+        <digest_separator_html><![CDATA[<p><br /></p>
+<hr />
+<p><br /></p>]]></digest_separator_html>
+        <digest_separator_text><![CDATA[\n--------------------------------------------------------------------------------\n]]></digest_separator_text>
+        <digest_subject/>
+        <digest_template/>
+        <digest_text/>
+        <digestable>false</digestable>
+        <enable_dynamic_translation>false</enable_dynamic_translation>
+        <event_name>approval.cancelled</event_name>
+        <event_parm_1>false</event_parm_1>
+        <event_parm_2>false</event_parm_2>
+        <exclude_delegates>false</exclude_delegates>
+        <force_delivery>false</force_delivery>
+        <from/>
+        <generation_type>engine</generation_type>
+        <importance/>
+        <include_attachments>false</include_attachments>
+        <item>event.parm1</item>
+        <item_table>x_brb_work_order_table</item_table>
+        <mandatory>false</mandatory>
+        <message/>
+        <message_html><![CDATA[<div class="WordSection1">
+<p style="text-align: center;"><img style="align: bottom;" title="Technology Logo" src="email_header_1.pngx" alt="Tech Logo" width="647" height="220" align="bottom" /></p>
+<p style="margin: 2pt 0in; line-height: normal;"><span style="font-family: 'Segoe UI', sans-serif; color: black; font-size: 12pt;">Hello ${parent.local_contact.first_name},<br /></span></p>
+<p style="margin: 2pt 0in; line-height: normal;"><span style="font-family: 'Segoe UI', sans-serif; color: black; font-size: 12pt;">&nbsp;</span></p>
+</div>
+<p style="margin: 0in; font-family: Calibri; font-size: 14.0pt;"><span style="font-size: 12pt;">&nbsp;The onsite work outlined in your <span style="color: #000000; font-family: Calibri; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial; display: inline; float: none;">Work Order: ${parent.number} has been rescheduled. </span></span><span style="font-size: 12pt;">The new estimated start date is: ${expected_start}<span style="font-weight: bold;">. </span>We will update you with any additional changes to the schedule<span style="font-weight: bold;">.<br /><br /></span></span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">&nbsp;</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">&nbsp;</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">Thank you for allowing the BETS team to assist you.&nbsp;</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">&nbsp;</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">&nbsp;</span></p>]]></message_html>
+        <message_list/>
+        <message_text/>
+        <name>Work Order schedule change</name>
+        <omit_watermark>false</omit_watermark>
+        <order>100</order>
+        <push_message_only>false</push_message_only>
+        <recipient_fields>opened_by,local_contact</recipient_fields>
+        <recipient_groups/>
+        <recipient_users/>
+        <reply_to/>
+        <send_self>false</send_self>
+        <sms_alternate/>
+        <style/>
+        <subject>Technology Services Your Work Order: ${parent.number} has a scheduled start change</subject>
+        <subscribable>false</subscribable>
+        <sys_class_name>sysevent_email_action</sys_class_name>
+        <sys_created_by>Rich.Currie</sys_created_by>
+        <sys_created_on>2019-06-04 17:13:24</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e4e66c52db35f300a3b7467239961942</sys_id>
+        <sys_mod_count>61</sys_mod_count>
+        <sys_name>Work Order schedule change</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sysevent_email_action_e4e66c52db35f300a3b7467239961942</sys_update_name>
+        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+        <sys_updated_on>2020-11-17 16:04:30</sys_updated_on>
+        <sys_version>2</sys_version>
+        <template/>
+        <type>email</type>
+        <weight>0</weight>
+    </sysevent_email_action>
+    <sys_translated_text action="delete_multiple" query="documentkey=e4e66c52db35f300a3b7467239961942"/>
+</record_update>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="all_tables.text_index_translations=true,hasLabels=true" audit="true" create_roles="itil_admin" db_object_id="cad7811113101200caa3da82e144b046" label="Location" max_length="40" name="cmn_location" text_index="true" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Divisional CIO (group)" max_length="32" name="x_brb_work_order_divisional_cio_grp" reference="sys_user_group" reference_qual="active=true^nameSTARTSWITHDivisional CIO^EQ" reference_qual_condition="active=true^nameSTARTSWITHDivisional CIO^EQ" type="reference"/>
+    </element>
+</database>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_view">
+    <sys_ui_view action="INSERT_OR_UPDATE">
+        <group/>
+        <hidden>false</hidden>
+        <name>pa_overview_1</name>
+        <roles/>
+        <sys_class_name>sys_ui_view</sys_class_name>
+        <sys_created_by>Rich.Currie</sys_created_by>
+        <sys_created_on>2019-05-16 19:24:30</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>73ae0bccdb697700a3b746723996197b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Pa_overview_1</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_ui_view_73ae0bccdb697700a3b746723996197b</sys_update_name>
+        <sys_updated_by>Rich.Currie</sys_updated_by>
+        <sys_updated_on>2019-05-16 19:24:30</sys_updated_on>
+        <title>Pa_overview_1</title>
+        <user/>
+    </sys_ui_view>
+</record_update>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_email_action">
+    <sysevent_email_action action="INSERT_OR_UPDATE">
+        <action_insert>false</action_insert>
+        <action_update>true</action_update>
+        <active>true</active>
+        <advanced_condition/>
+        <affected_field_on_event/>
+        <category display_value="Work Order" name="Work Order">093fa116dbb137008dfae9ec0b9619c6</category>
+        <collection>x_brb_work_order_table</collection>
+        <condition table="x_brb_work_order_table">stateCHANGESTO0^EQ<item display_value="Review" endquery="false" field="state" goto="false" newquery="false" operator="CHANGESTO" or="false" value="0"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <content_type>text/html</content_type>
+        <default_interval/>
+        <description/>
+        <digest_from/>
+        <digest_html/>
+        <digest_reply_to/>
+        <digest_separator_html><![CDATA[<p><br /></p>
+<hr />
+<p><br /></p>]]></digest_separator_html>
+        <digest_separator_text><![CDATA[\n--------------------------------------------------------------------------------\n]]></digest_separator_text>
+        <digest_subject/>
+        <digest_template/>
+        <digest_text/>
+        <digestable>false</digestable>
+        <enable_dynamic_translation>false</enable_dynamic_translation>
+        <event_name>approval.cancelled</event_name>
+        <event_parm_1>false</event_parm_1>
+        <event_parm_2>false</event_parm_2>
+        <exclude_delegates>false</exclude_delegates>
+        <force_delivery>false</force_delivery>
+        <from/>
+        <generation_type>engine</generation_type>
+        <importance/>
+        <include_attachments>false</include_attachments>
+        <item>event.parm1</item>
+        <item_table/>
+        <mandatory>false</mandatory>
+        <message/>
+        <message_html><![CDATA[<div class="WordSection1">
+<p style="text-align: center;"><img style="align: bottom;" title="Technology Logo" src="email_header_1.pngx" alt="Tech Logo" width="647" height="220" align="bottom" /></p>
+<p style="margin: 2pt 0in; line-height: normal;"><span style="font-family: 'Segoe UI', sans-serif; color: black; font-size: 12pt;">Hello ${local_contact.first_name},<br /></span></p>
+<p style="margin: 2pt 0in; line-height: normal;"><br /></p>
+</div>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">&nbsp;We have reviewed your Technology Solutions service desk request and have determined that an onsite technician will need to be dispatched to help resolve this issue. A new Work Order numbered ${number} has been created for someone to come to your location at:</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;"> ${delivery_address_street}</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">${delivery_address_city},${delivery_address_state_province}&nbsp; ${delivery_address_zip_postal_code}<br /><br /></span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">We currently have your contact information phone number as ${local_contact_phone}. Please let us know if any of the information is incorrect as the technician may be required to contact you when they arrive onsite before work can begin.<br /><br /></span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">We will notify you with updated scheduling information as it becomes available.</span><span style="font-size: 12pt;"><span style="font-weight: bold;"><br /></span>&nbsp;</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">Thank you for allowing the our team to assist you.&nbsp;</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">&nbsp;</span></p>
+<p style="margin: 0in; font-family: Calibri; font-size: 11.0pt;"><span style="font-size: 12pt;">&nbsp;</span></p>]]></message_html>
+        <message_list/>
+        <message_text/>
+        <name>Work Order New</name>
+        <omit_watermark>false</omit_watermark>
+        <order>100</order>
+        <push_message_only>false</push_message_only>
+        <recipient_fields>local_contact,location.x_brb_work_order_divisional_cio_grp</recipient_fields>
+        <recipient_groups name="Work Order Review">a7619ca7db95f300a3b7467239961917</recipient_groups>
+        <recipient_users/>
+        <reply_to/>
+        <send_self>true</send_self>
+        <sms_alternate/>
+        <style/>
+        <subject>Technology Solutions has created a Work order for you.</subject>
+        <subscribable>false</subscribable>
+        <sys_class_name>sysevent_email_action</sys_class_name>
+        <sys_created_by>Rich.Currie</sys_created_by>
+        <sys_created_on>2019-06-07 19:55:42</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>3318a493dbf93300923b84eb0b9619a9</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>Work Order New</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sysevent_email_action_3318a493dbf93300923b84eb0b9619a9</sys_update_name>
+        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+        <sys_updated_on>2020-11-17 16:03:24</sys_updated_on>
+        <sys_version>2</sys_version>
+        <template/>
+        <type>email</type>
+        <weight>0</weight>
+    </sysevent_email_action>
+    <sys_translated_text action="delete_multiple" query="documentkey=3318a493dbf93300923b84eb0b9619a9"/>
+</record_update>

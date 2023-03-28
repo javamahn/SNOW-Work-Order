@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="sys_class_name" table="x_brb_work_order_task" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>sys_class_name</element>
+            <name>x_brb_work_order_task</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-06-03 15:28:23</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>sys_class_name</sys_name>
+            <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+            <sys_update_name>sys_choice_x_brb_work_order_task_sys_class_name</sys_update_name>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-06-03 15:28:23</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>sys_class_name</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Work Order Task</label>
+            <language>en</language>
+            <name>x_brb_work_order_task</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>greg.brubaker</sys_created_by>
+            <sys_created_on>2019-06-03 15:28:23</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>90450731db79b3008dfae9ec0b96196e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>greg.brubaker</sys_updated_by>
+            <sys_updated_on>2019-06-03 15:28:23</sys_updated_on>
+            <value>x_brb_work_order_task</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

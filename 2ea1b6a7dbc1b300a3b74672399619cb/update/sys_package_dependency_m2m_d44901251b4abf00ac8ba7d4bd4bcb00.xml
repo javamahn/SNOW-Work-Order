@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
+    <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
+        <dependency display_value="Workflow Runtime Engine" source="com.glideapp.workflow">8158cd1113101200caa3da82e144b04b</dependency>
+        <min_version>1.0.0</min_version>
+        <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+        <sys_created_on>2019-06-14 22:03:49</sys_created_on>
+        <sys_id>d44901251b4abf00ac8ba7d4bd4bcb00</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+        <sys_updated_on>2019-06-14 22:03:49</sys_updated_on>
+    </sys_package_dependency_m2m>
+</record_update>

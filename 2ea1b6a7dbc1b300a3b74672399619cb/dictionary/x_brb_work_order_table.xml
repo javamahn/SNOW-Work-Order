@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" db_object_id="6ea1b6a7dbc1b300a3b74672399619cb" extends="task" label="Work Order" max_length="40" name="x_brb_work_order_table" text_index="true" type="collection">
+        <element attributes="edge_encryption_enabled=true" hint="Requires Approval by local leadership" label="Billable" max_length="40" name="billable" type="boolean"/>
+        <element attributes="omit_sys_original=true,edge_encryption_enabled=true" label="Cost Estimate" max_length="20" name="cost_estimate" type="currency"/>
+        <element label="Delivery Address City" max_length="255" name="delivery_address_city" type="string"/>
+        <element choice="1" label="Delivery Address Same As Billable" mandatory="true" max_length="50" name="delivery_address_same_as_billable" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Yes" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="No" sequence="2" value="0"/>
+            </choice>
+        </element>
+        <element label="Delivery Address State/Province" max_length="2" name="delivery_address_state_province" type="string"/>
+        <element label="Delivery Address Street" max_length="255" name="delivery_address_street" type="string"/>
+        <element label="Delivery Address Suite" max_length="255" name="delivery_address_suite" type="string"/>
+        <element label="Delivery Address Zip/Postal Code" max_length="10" name="delivery_address_zip_postal_code" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Estimated work duration" max_length="40" name="estimated_work_duration" type="glide_duration"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="work_type" dependent_on_field="work_type" label="Hardware Purchase" max_length="40" name="hardware_purchase" type="string" use_dependent_field="true">
+            <choice>
+                <element dependent_value="1" inactive_on_update="false" label="Desktop Level 1" sequence="0" value="Desktop Level 1"/>
+                <element dependent_value="4" inactive_on_update="false" label="Desktop Level 1" sequence="0" value="Desktop Level 1"/>
+                <element dependent_value="3" inactive_on_update="false" label="Firewall" sequence="0" value="Firewall"/>
+                <element dependent_value="2" inactive_on_update="false" label="Server Level 1" sequence="0" value="Server Level 1"/>
+                <element dependent_value="4" inactive_on_update="false" label="Desktop Level 2" sequence="1" value="Desktop Level 2"/>
+                <element dependent_value="1" inactive_on_update="false" label="Desktop Level 2" sequence="1" value="Desktop Level 2"/>
+                <element dependent_value="3" inactive_on_update="false" label="Router" sequence="1" value="Router"/>
+                <element dependent_value="4" inactive_on_update="false" label="Desktop Level 3" sequence="2" value="Desktop Level 3"/>
+                <element dependent_value="1" inactive_on_update="false" label="Desktop Level 3" sequence="2" value="Desktop Level 3"/>
+                <element dependent_value="3" inactive_on_update="false" label="Switch" sequence="2" value="Switch"/>
+                <element dependent_value="4" inactive_on_update="false" label="Laptop Level 1" sequence="3" value="Laptop Level 1"/>
+                <element dependent_value="1" inactive_on_update="false" label="Laptop Level 1" sequence="3" value="Laptop Level 1"/>
+                <element dependent_value="3" inactive_on_update="false" label="Wireless Access Point" sequence="3" value="Wireless Access Point"/>
+                <element dependent_value="4" inactive_on_update="false" label="Laptop Level 2" sequence="4" value="Laptop Level 2"/>
+                <element dependent_value="1" inactive_on_update="false" label="Laptop Level 2" sequence="4" value="Laptop Level 2"/>
+                <element dependent_value="4" inactive_on_update="false" label="Laptop Level 3" sequence="5" value="Laptop Level 3"/>
+                <element dependent_value="1" inactive_on_update="false" label="Laptop Level 3" sequence="5" value="Laptop Level 3"/>
+                <element dependent_value="4" inactive_on_update="false" label="Server Level 1" sequence="6" value="Server Level 1"/>
+            </choice>
+        </element>
+        <element choice="1" label="Level Of Effort" max_length="255" name="level_of_effort" type="string">
+            <choice>
+                <element inactive_on_update="false" label="0.5 Days" sequence="1" value="0.5"/>
+                <element inactive_on_update="false" label="1 Day" sequence="2" value="1"/>
+                <element inactive_on_update="false" label="1.5 Days" sequence="3" value="1.5"/>
+                <element inactive_on_update="false" label="2 Days" sequence="4" value="2"/>
+                <element inactive_on_update="false" label="3 Days" sequence="5" value="3"/>
+                <element inactive_on_update="false" label="4 Days" sequence="6" value="4"/>
+                <element inactive_on_update="false" label="5 Days" sequence="7" value="5"/>
+                <element inactive_on_update="false" label="7 Days" sequence="8" value="7"/>
+                <element inactive_on_update="false" label="10 Days" sequence="9" value="10"/>
+                <element inactive_on_update="false" label="15 Days" sequence="10" value="15"/>
+                <element inactive_on_update="false" label="20 Days" sequence="11" value="20"/>
+                <element inactive_on_update="false" label="30 Days" sequence="12" value="30"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Local Contact" mandatory="true" max_length="32" name="local_contact" reference="sys_user" reference_qual="user_nameSTARTSWITH^EQ" reference_qual_condition="user_nameSTARTSWITH^EQ" type="reference"/>
+        <element label="Local Contact Phone" mandatory="true" max_length="40" name="local_contact_phone" type="string"/>
+        <element choice="1" label="# of Techs" max_length="50" name="number_of_techs" type="string">
+            <choice>
+                <element inactive_on_update="false" label="1" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="2" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="3" sequence="3" value="3"/>
+                <element inactive_on_update="false" label="4" sequence="4" value="4"/>
+                <element inactive_on_update="false" label="5" sequence="5" value="5"/>
+                <element inactive_on_update="false" label="6" sequence="6" value="6"/>
+                <element inactive_on_update="false" label="7" sequence="7" value="7"/>
+                <element inactive_on_update="false" label="8" sequence="8" value="8"/>
+                <element inactive_on_update="false" label="9" sequence="9" value="9"/>
+                <element inactive_on_update="false" label="10" sequence="10" value="10"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" label="Purchase details" max_length="10000" name="purchase_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Quantity" max_length="2" name="quantity" type="integer"/>
+        <element choice="1" dependent="work_type" dependent_on_field="work_type" label="Request Type" mandatory="true" max_length="255" name="request_type" type="string" use_dependent_field="true">
+            <choice>
+                <element dependent_value="3" inactive_on_update="false" label="Configure" value="3"/>
+                <element dependent_value="2" inactive_on_update="false" label="Configure" value="3"/>
+                <element dependent_value="1" inactive_on_update="false" label="Configure" value="3"/>
+                <element dependent_value="2" inactive_on_update="false" label="Move" value="1"/>
+                <element dependent_value="1" inactive_on_update="false" label="Move" value="1"/>
+                <element dependent_value="3" inactive_on_update="false" label="Move" value="1"/>
+                <element dependent_value="4" inactive_on_update="false" label="Office Move" value="7"/>
+                <element dependent_value="5" inactive_on_update="false" label="Project" value="9"/>
+                <element dependent_value="4" inactive_on_update="false" label="Refresh" value="8"/>
+                <element dependent_value="1" inactive_on_update="false" label="Security remediation" value="4"/>
+                <element dependent_value="2" inactive_on_update="false" label="Security remediation" value="4"/>
+                <element dependent_value="3" inactive_on_update="false" label="Security remediation" value="4"/>
+                <element dependent_value="3" inactive_on_update="false" label="Smart Hands" value="6"/>
+                <element dependent_value="2" inactive_on_update="false" label="Smart Hands" value="6"/>
+                <element dependent_value="3" inactive_on_update="false" label="SW/HW Install" value="2"/>
+                <element dependent_value="2" inactive_on_update="false" label="SW/HW Install" value="2"/>
+                <element dependent_value="1" inactive_on_update="false" label="SW/HW Install" value="2"/>
+                <element dependent_value="1" inactive_on_update="false" label="Upgrade" value="5"/>
+                <element dependent_value="3" inactive_on_update="false" label="Upgrade" value="5"/>
+                <element dependent_value="2" inactive_on_update="false" label="Upgrade" value="5"/>
+            </choice>
+        </element>
+        <element label="Technical Contact Phone" mandatory="true" max_length="40" name="technical_contact_phone" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Bill Address" max_length="4000" name="u_string_1" read_only="true" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Rates" max_length="40" name="u_string_3" type="string"/>
+        <element choice="1" label="Work Type" mandatory="true" max_length="255" name="work_type" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Desktop/User Device" sequence="1" value="1"/>
+                <element inactive_on_update="false" label="Server" sequence="2" value="2"/>
+                <element inactive_on_update="false" label="Network" sequence="3" value="3"/>
+                <element inactive_on_update="false" label="Site" sequence="4" value="4"/>
+                <element inactive_on_update="false" label="Custom Project" sequence="5" value="5"/>
+            </choice>
+        </element>
+        <index name="index">
+            <element name="local_contact"/>
+        </index>
+    </element>
+</database>

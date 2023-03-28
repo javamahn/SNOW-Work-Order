@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_rest_message_fn_parameters">
+    <sys_rest_message_fn_parameters action="INSERT_OR_UPDATE">
+        <name>token</name>
+        <rest_message_function display_value="Create Work Order - TEST">f51dd0a91beaf780269c10e58d4bcb25</rest_message_function>
+        <sys_class_name>sys_rest_message_fn_parameters</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-07-09 15:24:35</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>3f9d1c2d1beaf780269c10e58d4bcb5f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>token</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_rest_message_fn_parameters_3f9d1c2d1beaf780269c10e58d4bcb5f</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-07-09 15:24:55</sys_updated_on>
+        <type>string</type>
+        <value>eyJhbGciOiJSUzI1NiIsImtpZCI6IjZCN0FDQzUyMDMwNUJGREI0RjcyNTJEQUVCMjE3N0NDMDkxRkFBRTEiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJhM3JNVWdNRnY5dFBjbExhNnlGM3pBa2ZxdUUifQ.eyJuYmYiOjE1NTkyMzc0MzcsImV4cCI6MTU1OTM2NzAzNywiaXNzIjoiaHR0cHM6Ly90ZXN0aW5zaWdodC5maWVsZHBvd2VyLmNvbS9pbnNpZ2h0aWRlbnRpdHkiLCJhdWQiOlsiaHR0cHM6Ly90ZXN0aW5zaWdodC5maWVsZHBvd2VyLmNvbS9pbnNpZ2h0aWRlbnRpdHkvcmVzb3VyY2VzIiwiZGF0YUV2ZW50UmVjb3JkcyJdLCJjbGllbnRfaWQiOiJyb2NsaWVudCIsInN1YiI6IjExNjg2IiwiYXV0aF90aW1lIjoxNTU5MjM3NDM3LCJpZHAiOiJsb2NhbCIsImVtYWlsIjoiQXBpX0JCQGluc2lnaHQudGVzdCIsIkNvbXBhbnlJZCI6IjciLCJEaXNwbGF5TmFtZSI6IkJyb3duIiwiQ291bnRyeUlkIjoiMSIsIlZlbmRvcklkIjoiMTE3MSIsIlRoZW1lSWQiOiIyMDkiLCJJc01hbmFnZXIiOiJGYWxzZSIsIkhvbWVQYWdlSWQiOiIiLCJUaW1lWm9uZUlkIjoiMiIsIkJ1c2luZXNzQWRkcmVzc0lkIjoiNzI1MDIiLCJNcGluIjoiIiwiSXNUZWNoIjoiRmFsc2UiLCJDb21wYW55Q29kZSI6Ik5TSVQiLCJDdWx0dXJlIjoiZW4tVVMiLCJMYW5ndWFnZUlkIjoiMTYiLCJMYW5ndWFnZSI6ImVuIiwiQ3VycmVuY3kiOiJVU0QiLCJMb2dvUGF0aCI6ImxvZ28ucG5nIiwiTWFwSWQiOiIxIiwiTWFwS2V5IjoiQW5IOHVaeVd0djM4S2RDVlJibmpNdjZnTXFicXBMb0NHUElhclF5Q0NyblY1d1BOUnNMN0lRallBSEphaHN3YyIsIklzTGF0TG9uQmFzZWQiOiIwIiwiSXNQcm9qZWN0RW5hYmxlZCI6IjEiLCJEZWZhdWx0Q291bnRyeUlkIjoiMSIsIk1heFJvbGVHcm91cCI6IjIiLCJJc0NoYW5nZVBhc3N3b3JkIjoiMCIsInJvbGUiOiIxNjc5MyIsInNjb3BlIjpbImRhdGFFdmVudFJlY29yZHMiLCJvZmZsaW5lX2FjY2VzcyJdLCJhbXIiOlsicm9wYXNzd29yZCJdfQ.dmcOkEQqokzYFeOYuFy5oub2Kl9pz3b-j1grThkOpwoC-hKhQLs9SL4HkKWJ86cWPL0lEJJs6hNoYJZHgK9aLBdgyEDjRwfDBq80KM6ZBO9vCAxqAOc0ql1cQ81eOPc3KrmBxOb3bT64bX-xvL7dVXwLWYV1wdvUi8A-LItTcvXMz56nJTcGfJNu5EnBkgHa3jiqsgp5lnmPLNUh8RnFCZXF7TdIHWc_tfgqo420ZwydU0nk4k8k2_RvQN9jCmdMXcrPW5-kBfOXPBY-8CVKx46U6JqQOYPocFMHTzk6JBhrKRJTwElTSvCTLF-Lt5kDv8fx38qsuCPLc0TiXGSsEg</value>
+    </sys_rest_message_fn_parameters>
+</record_update>

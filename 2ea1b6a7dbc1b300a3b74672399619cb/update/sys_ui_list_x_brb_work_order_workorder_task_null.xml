@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="x_brb_work_order_workorder_task" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_active</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>7589bb361b1efb40ac8ba7d4bd4bcb1c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_activity_due</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>f989bb361b1efb40ac8ba7d4bd4bcb1c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_additional_assignee_list</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>7d89bb361b1efb40ac8ba7d4bd4bcb1c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_approval</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>fd89bb361b1efb40ac8ba7d4bd4bcb1c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_approval_history</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>7189bb361b1efb40ac8ba7d4bd4bcb1d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_approval_set</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>f189bb361b1efb40ac8ba7d4bd4bcb1d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_assigned_to</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>7589bb361b1efb40ac8ba7d4bd4bcb1d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_assignment_group</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>7</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>f589bb361b1efb40ac8ba7d4bd4bcb1d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_billable</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>8</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>7989bb361b1efb40ac8ba7d4bd4bcb1d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>wotable_business_duration</element>
+            <list_id display_value="x_brb_work_order_workorder_task" element="NULL" name="x_brb_work_order_workorder_task" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">3989bb361b1efb40ac8ba7d4bd4bcb1b</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>9</position>
+            <sum>false</sum>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_id>f989bb361b1efb40ac8ba7d4bd4bcb1d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_brb_work_order_workorder_task</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-07-01 18:22:05</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>3989bb361b1efb40ac8ba7d4bd4bcb1b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_brb_work_order_workorder_task</sys_name>
+            <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+            <sys_update_name>sys_ui_list_x_brb_work_order_workorder_task_null</sys_update_name>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-07-01 18:22:05</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

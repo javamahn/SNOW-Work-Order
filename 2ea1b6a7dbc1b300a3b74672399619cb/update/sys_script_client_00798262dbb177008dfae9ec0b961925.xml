@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>local_contact</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Work Order - Local Contact Change</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+   if (isLoading || newValue === '') {
+      return;
+   }
+
+	var ajax = new GlideAjax('x_brb_work_order.WorkOrderUtils');
+	ajax.addParam('sysparm_name', 'getUserInfo');
+	ajax.addParam('sysparm_sys_id', newValue);
+	ajax.getXMLAnswer(handleUserInfo);
+	
+   	function handleUserInfo(response) {
+		var userInfo = JSON.parse(response);
+		g_form.setValue('local_contact_phone', userInfo.phone );
+	}
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-06-05 19:03:42</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>00798262dbb177008dfae9ec0b961925</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Work Order - Local Contact Change</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_script_client_00798262dbb177008dfae9ec0b961925</sys_update_name>
+        <sys_updated_by>greg.brubaker</sys_updated_by>
+        <sys_updated_on>2019-06-05 19:17:40</sys_updated_on>
+        <table>x_brb_work_order_table</table>
+        <type>onChange</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>

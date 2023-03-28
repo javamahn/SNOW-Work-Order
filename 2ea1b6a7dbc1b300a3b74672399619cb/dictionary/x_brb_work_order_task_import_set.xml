@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="4235984edb7db3008dfae9ec0b9619d0" extends="sys_import_set_row" label="Work Order Task Integration" max_length="40" name="x_brb_work_order_task_import_set" type="collection">
+        <element attributes="import_attribute_name=u_dispatched_on,edge_encryption_enabled=true" label="Dispatched on" max_length="40" name="u_dispatched_on" type="string"/>
+        <element attributes="import_attribute_name=u_expected_end,edge_encryption_enabled=true" label="Expected End" max_length="40" name="u_expected_end" type="string"/>
+        <element attributes="import_attribute_name=u_expected_start,edge_encryption_enabled=true" label="Expected Start" max_length="40" name="u_expected_start" type="string"/>
+        <element attributes="import_attribute_name=u_state,edge_encryption_enabled=true" label="State" max_length="40" name="u_state" type="string"/>
+        <element attributes="import_attribute_name=u_sys_id,edge_encryption_enabled=true" label="Task Sys ID" max_length="40" name="u_sys_id" type="string"/>
+        <element attributes="import_attribute_name=u_work_end,edge_encryption_enabled=true" label="Work end" max_length="1000" name="u_work_end" type="string"/>
+        <element attributes="import_attribute_name=u_work_notes,edge_encryption_enabled=true" label="Work notes" max_length="4000" name="u_work_notes" type="string"/>
+        <element attributes="import_attribute_name=u_work_start,edge_encryption_enabled=true" label="Work start" max_length="40" name="u_work_start" type="string"/>
+    </element>
+</database>

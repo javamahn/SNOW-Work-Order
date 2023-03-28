@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="364905251b4abf00ac8ba7d4bd4bcba0" sys_domain="global" table="sys_script_client" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-06-14 22:03:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>324905251b4abf00ac8ba7d4bd4bcba1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="sys_script_client" name="sys_script_client" sys_domain="global" view="Default view">364905251b4abf00ac8ba7d4bd4bcba0</sys_ui_form>
+            <sys_ui_section caption="NULL" display_value="" name="sys_script_client" sys_domain="global" view="Default view">09b5c87ac0a800050065fd6faebadc1d</sys_ui_section>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-06-14 22:03:59</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-06-14 22:03:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ba4905251b4abf00ac8ba7d4bd4bcba1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="sys_script_client" name="sys_script_client" sys_domain="global" view="Default view">364905251b4abf00ac8ba7d4bd4bcba0</sys_ui_form>
+            <sys_ui_section caption="Access to jQuery, prototype, window" display_value="Access to jQuery, prototype, window" name="sys_script_client" sys_domain="global" view="Default view">52925e3fdb1d33008dfae9ec0b961924</sys_ui_section>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-06-14 22:03:59</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>sys_script_client</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>sanderson@bbinstech.com</sys_created_by>
+            <sys_created_on>2019-06-14 22:03:59</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>364905251b4abf00ac8ba7d4bd4bcba0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>sys_script_client</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+            <sys_update_name>sys_ui_form_sections_364905251b4abf00ac8ba7d4bd4bcba0</sys_update_name>
+            <sys_updated_by>sanderson@bbinstech.com</sys_updated_by>
+            <sys_updated_on>2019-06-14 22:03:59</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

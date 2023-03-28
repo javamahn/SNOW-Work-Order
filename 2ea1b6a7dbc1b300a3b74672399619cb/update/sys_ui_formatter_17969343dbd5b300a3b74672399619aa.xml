@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_formatter">
+    <sys_ui_formatter action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <angular_module/>
+        <formatter>process_flow.xml</formatter>
+        <name>Work Order Process Flow</name>
+        <seismic_component/>
+        <sys_class_name>sys_ui_formatter</sys_class_name>
+        <sys_created_by>stephen.anderson</sys_created_by>
+        <sys_created_on>2019-05-13 17:25:13</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>17969343dbd5b300a3b74672399619aa</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Work Order Process Flow</sys_name>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_ui_formatter_17969343dbd5b300a3b74672399619aa</sys_update_name>
+        <sys_updated_by>stephen.anderson</sys_updated_by>
+        <sys_updated_on>2019-05-13 17:31:04</sys_updated_on>
+        <table>x_brb_work_order_table</table>
+        <type>formatter</type>
+    </sys_ui_formatter>
+</record_update>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update node_type="sys_portal_page" unload_date="2023-03-28 16:14:36">
+    <sys_portal_page action="INSERT_OR_UPDATE">
+        <layout/>
+        <order/>
+        <read_roles>snc_internal</read_roles>
+        <roles/>
+        <selectable>false</selectable>
+        <sys_class_name>sys_portal_page</sys_class_name>
+        <sys_created_by>Rich.Currie</sys_created_by>
+        <sys_created_on>2019-06-03 14:12:54</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>07f33af5db71b300a3b746723996195c</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>PA Work Order Tasks</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_portal_page_07f33af5db71b300a3b746723996195c</sys_update_name>
+        <sys_updated_by>Rich.Currie</sys_updated_by>
+        <sys_updated_on>2019-06-04 15:55:12</sys_updated_on>
+        <title>PA Work Order Tasks</title>
+        <user/>
+        <view>pa_wo_tasks_(active_tasks_by_assg_grp)</view>
+        <related_items_node>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone1</dropzone>
+                <offset>0</offset>
+                <page display_value="PA Work Order Tasks">07f33af5db71b300a3b746723996195c</page>
+                <summary/>
+                <sys_created_by>Rich.Currie</sys_created_by>
+                <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                <sys_id>2ab4dc92dbf1f300a3b74672399619d0</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Rich.Currie</sys_updated_by>
+                <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">2ab4dc92dbf1f300a3b74672399619d0</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>22b4dc92dbf1f300a3b74672399619d1</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">2ab4dc92dbf1f300a3b74672399619d0</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>22b4dc92dbf1f300a3b74672399619d2</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">2ab4dc92dbf1f300a3b74672399619d0</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>26b4dc92dbf1f300a3b74672399619d1</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">2ab4dc92dbf1f300a3b74672399619d0</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>26b4dc92dbf1f300a3b74672399619d2</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>Work Order Tasks (active) by Assignment Grp/location agg</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_publish</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">2ab4dc92dbf1f300a3b74672399619d0</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>2ab4dc92dbf1f300a3b74672399619d1</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">2ab4dc92dbf1f300a3b74672399619d0</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>2eb4dc92dbf1f300a3b74672399619d1</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>pie</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">2ab4dc92dbf1f300a3b74672399619d0</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>aab4dc92dbf1f300a3b74672399619d0</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>a98288dedb71f300a3b7467239961953</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">2ab4dc92dbf1f300a3b74672399619d0</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>aab4dc92dbf1f300a3b74672399619d2</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>07f33af5db71b300a3b746723996195c</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone0</dropzone>
+                <offset>0</offset>
+                <page display_value="PA Work Order Tasks">07f33af5db71b300a3b746723996195c</page>
+                <summary/>
+                <sys_created_by>Rich.Currie</sys_created_by>
+                <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                <sys_id>66b4dc92dbf1f300a3b74672399619ce</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Rich.Currie</sys_updated_by>
+                <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">66b4dc92dbf1f300a3b74672399619ce</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>62b4dc92dbf1f300a3b74672399619cf</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">66b4dc92dbf1f300a3b74672399619ce</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>66b4dc92dbf1f300a3b74672399619cf</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">66b4dc92dbf1f300a3b74672399619ce</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>6ab4dc92dbf1f300a3b74672399619cf</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>list</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">66b4dc92dbf1f300a3b74672399619ce</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>6eb4dc92dbf1f300a3b74672399619ce</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">66b4dc92dbf1f300a3b74672399619ce</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>6eb4dc92dbf1f300a3b74672399619cf</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>WO Tasks by Assgrp</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">66b4dc92dbf1f300a3b74672399619ce</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>e2b4dc92dbf1f300a3b74672399619d0</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>07f33af5db71b300a3b746723996195c</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">66b4dc92dbf1f300a3b74672399619ce</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>e6b4dc92dbf1f300a3b74672399619ce</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>d4a3fe75db71b300a3b746723996190c</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+            <sys_portal action="INSERT_OR_UPDATE">
+                <dropzone>dropzone2</dropzone>
+                <offset>0</offset>
+                <page display_value="PA Work Order Tasks">07f33af5db71b300a3b746723996195c</page>
+                <summary/>
+                <sys_created_by>Rich.Currie</sys_created_by>
+                <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                <sys_id>eeb4dc92dbf1f300a3b74672399619d2</sys_id>
+                <sys_mod_count>0</sys_mod_count>
+                <sys_updated_by>Rich.Currie</sys_updated_by>
+                <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                <related_items_node>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>title</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">eeb4dc92dbf1f300a3b74672399619d2</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>22b450d2dbf1f300a3b7467239961956</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>Work Order Tasks State (agg Location)</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>sys_id</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">eeb4dc92dbf1f300a3b74672399619d2</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>62b4dc92dbf1f300a3b74672399619d3</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>ff780b5adbed7b008dfae9ec0b961950</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>current_page</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">eeb4dc92dbf1f300a3b74672399619d2</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>a6b450d2dbf1f300a3b7467239961956</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>07f33af5db71b300a3b746723996195c</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>report_type</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">eeb4dc92dbf1f300a3b74672399619d2</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>e2b4dc92dbf1f300a3b74672399619d4</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>semi_donut</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>renderer</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">eeb4dc92dbf1f300a3b74672399619d2</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>e6b4dc92dbf1f300a3b74672399619d3</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>com.glide.ui.portal.RenderReport</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>help_text_window</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">eeb4dc92dbf1f300a3b74672399619d2</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>eab4dc92dbf1f300a3b74672399619d3</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>report_widget_description</value>
+                    </sys_portal_preferences>
+                    <sys_portal_preferences action="INSERT_OR_UPDATE">
+                        <name>can_subscribe</name>
+                        <portal_section display_value="Created 06-04-2019 08:54:04">eeb4dc92dbf1f300a3b74672399619d2</portal_section>
+                        <sys_created_by>Rich.Currie</sys_created_by>
+                        <sys_created_on>2019-06-04 15:54:04</sys_created_on>
+                        <sys_id>eeb4dc92dbf1f300a3b74672399619d3</sys_id>
+                        <sys_mod_count>0</sys_mod_count>
+                        <sys_updated_by>Rich.Currie</sys_updated_by>
+                        <sys_updated_on>2019-06-04 15:54:04</sys_updated_on>
+                        <value>true</value>
+                    </sys_portal_preferences>
+                </related_items_node>
+            </sys_portal>
+        </related_items_node>
+    </sys_portal_page>
+</record_update>

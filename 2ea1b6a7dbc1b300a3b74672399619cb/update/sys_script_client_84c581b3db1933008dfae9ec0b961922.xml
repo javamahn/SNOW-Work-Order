@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>work_type</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Work Order - Work Type Change</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	if (isLoading || newValue === '') {
+		return;
+	}
+	
+	// Set Request Type to Project if Work Type becomes Custom Project, and set description field message
+	var work_type = g_form.getValue('work_type');
+	
+	if(work_type == 5 /* Custom Project */) {
+		g_form.setValue('request_type', 9 /* Project */);
+		g_form.showFieldMsg('description', 'NOTE: Custom Projects require full accurate description information be entered above.','warning');
+	//	g_form.setMandatory('description', true);	
+	}
+	else {
+		g_form.hideFieldMsg('description');
+	//	g_form.setMandatory('description', false);	
+	}
+	
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>greg.brubaker</sys_created_by>
+        <sys_created_on>2019-05-15 14:48:41</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>84c581b3db1933008dfae9ec0b961922</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Work Order - Work Type Change</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Work Order" source="x_brb_work_order">2ea1b6a7dbc1b300a3b74672399619cb</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Work Order">2ea1b6a7dbc1b300a3b74672399619cb</sys_scope>
+        <sys_update_name>sys_script_client_84c581b3db1933008dfae9ec0b961922</sys_update_name>
+        <sys_updated_by>stephen.anderson</sys_updated_by>
+        <sys_updated_on>2019-06-06 16:23:27</sys_updated_on>
+        <table>x_brb_work_order_table</table>
+        <type>onChange</type>
+        <ui_type>0</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
